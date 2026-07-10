@@ -105,15 +105,12 @@ export function Navigation() {
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${resourcesOpen ? 'rotate-180' : ''}`} />
               </button>
               {resourcesOpen && (
-                <div className="absolute top-[calc(100%+8px)] left-0 bg-synth-surface border border-synth-border rounded-[16px] shadow-[0_12px_40px_rgba(0,0,0,0.10),0_2px_8px_rgba(0,0,0,0.04)] min-w-[200px] p-2 z-50 animate-fade-in">
-                  {["Documentation", "Blog", "Updates", "Help centre", "Trust centre"].map((item) => {
-                    const href = item === "Trust centre" ? "/trust" : "#"
-                    return (
-                      <a key={item} href={href} className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors">
-                        {item}
-                      </a>
-                    )
-                  })}
+                <div className="absolute top-[calc(100%+8px)] left-0 bg-synth-surface border border-synth-border rounded-[16px] shadow-[0_12px_40px_rgba(0,0,0,0.10),0_2px_8px_rgba(0,0,0,0.04)] min-w-[200px] p-3 z-50 animate-fade-in">
+                  <div className="mb-2 px-1">
+                    <div className="text-[12px] font-semibold text-synth-text-1 uppercase tracking-[1px] mb-2">Compare</div>
+                    <Link href="/compare/vsChatgpt" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>VS ChatGPT</Link>
+                    <Link href="/compare/vsTrixta" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>VS Trixta</Link>
+                  </div>
                 </div>
               )}
             </div>
@@ -122,14 +119,14 @@ export function Navigation() {
               Pricing
             </Link>
 
-            <a href="mailto:hello@synth.ai" className="px-3 py-1.5 rounded-md text-[14px] font-normal text-synth-text-2 hover:text-synth-text-1 hover:bg-black/[0.04] transition-colors">
+            <a href="mailto:hello@synthai.world" className="px-3 py-1.5 rounded-md text-[14px] font-normal text-synth-text-2 hover:text-synth-text-1 hover:bg-black/[0.04] transition-colors">
               Enterprise
             </a>
           </div>
 
           {/* Right CTAs */}
           <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-            <a href="mailto:hello@synth.ai" className="text-[14px] font-medium text-synth-text-2 px-3.5 py-[7px] rounded-md hover:bg-black/[0.05] hover:text-synth-text-1 transition-all border border-transparent">
+            <a href="mailto:hello@synthai.world" className="text-[14px] font-medium text-synth-text-2 px-3.5 py-[7px] rounded-md hover:bg-black/[0.05] hover:text-synth-text-1 transition-all border border-transparent">
               Contact us
             </a>
             <Link 

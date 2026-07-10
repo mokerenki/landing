@@ -51,10 +51,10 @@ export function CTASection() {
             <a href="mailto:hello@synth.ai?subject=API access" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
               ⟨/⟩ API access
             </a>
-            <a href="mailto:healthcare@synth.ai" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
+            <a href="mailto:healthcare@synthai.world" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
               🏥 Healthcare demo
             </a>
-            <a href="mailto:hello@synth.ai?subject=Enterprise" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
+            <a href="mailto:hello@synthai.world?subject=Enterprise" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
               🏢 Enterprise
             </a>
           </div>

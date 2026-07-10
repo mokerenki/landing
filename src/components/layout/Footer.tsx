@@ -9,27 +9,35 @@ const solutions = [
   { label: "Healthcare Admin", href: "/solutions/healthcare" },
 ]
 
-const product = [
-  "Features", "Pricing", "API", "WhatsApp Integration", "Telegram Integration", "Custom MCPs"
+const compare = [
+  { label: "vs. ChatGPT", href: "/compare/vsChatgpt" },
+  { label: "vs. Trixta", href: "/compare/vsTrixta" }
 ]
 
-const company = [
-  "About", "Blog", "Careers", "Contact", "Trust Centre", "Brand Assets"
+const product = [
+  { label: "Features", href: "/#features" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "API", href: "/api-docs" },
+  { label: "Custom MCPs", href: "/mcp" }
 ]
 
 const legal = [
-  "Privacy Policy", "Terms of Service", "POPIA Compliance", "Data Processing", "Cookie Policy"
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "POPIA Compliance", href: "/data-processing" },
+  { label: "Data Processing", href: "/data-processing" },
+  { label: "Cookie Policy", href: "/cookies" }
 ]
 
 export function Footer() {
   return (
     <footer className="border-t border-synth-border bg-synth-surface">
-      <div className="wrap py-14">
+      <div className="wrap py-14 mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-2 md:grid-cols-[1.8fr_repeat(4,1fr)] gap-8 mb-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="font-serif text-[22px] text-synth-text-1 tracking-[-0.3px]">
-              <em>synth</em>
+            <Link href="/" className="font-serif text-[22px] text-synth-text-1 tracking-[-0.3px] font-medium">
+              synth<span className="text-indigo-600">.ai</span>
             </Link>
             <p className="text-[13px] text-synth-text-3 leading-[1.65] mt-2 max-w-[200px]">
               Autonomous AI for every business function — delivered where you already work.
@@ -55,20 +63,24 @@ export function Footer() {
             <h4 className="text-[12px] font-semibold text-synth-text-1 uppercase tracking-[1px] mb-3">Product</h4>
             <ul className="space-y-2">
               {product.map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-[13px] text-synth-text-3 hover:text-synth-text-1 transition-colors">{item}</a>
+                <li key={item.label}>
+                  <Link href={item.href} className="text-[13px] text-synth-text-3 hover:text-synth-text-1 transition-colors">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Compare*/}
           <div>
-            <h4 className="text-[12px] font-semibold text-synth-text-1 uppercase tracking-[1px] mb-3">Company</h4>
+            <h4 className="text-[12px] font-semibold text-synth-text-1 uppercase tracking-[1px] mb-3">Compare</h4>
             <ul className="space-y-2">
-              {company.map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-[13px] text-synth-text-3 hover:text-synth-text-1 transition-colors">{item}</a>
+              {compare.map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href} className="text-[13px] text-synth-text-3 hover:text-synth-text-1 transition-colors">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -79,8 +91,10 @@ export function Footer() {
             <h4 className="text-[12px] font-semibold text-synth-text-1 uppercase tracking-[1px] mb-3">Legal</h4>
             <ul className="space-y-2">
               {legal.map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-[13px] text-synth-text-3 hover:text-synth-text-1 transition-colors">{item}</a>
+                <li key={item.label}>
+                  <Link href={item.href} className="text-[13px] text-synth-text-3 hover:text-synth-text-1 transition-colors">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -88,7 +102,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-synth-border pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
-          <p className="text-[12px] text-synth-text-3">© 2026 Synth AI · Built in South Africa · hello@synth.ai</p>
+          <p className="text-[12px] text-synth-text-3">© 2026 Synth AI · hello@synthai.world</p>
           <div className="flex gap-3">
             {["LinkedIn", "X / Twitter", "Instagram", "WhatsApp"].map((item) => (
               <a key={item} href="#" className="text-[12px] text-synth-text-3 hover:text-synth-text-1 transition-colors">{item}</a>
