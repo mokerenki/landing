@@ -302,7 +302,7 @@ export default function VsTrixta() {
           justify-content: center;
           gap: 12px;
           flex-wrap: wrap;
-          margin-bottom: 32px;
+          margin-bottom: 42px;
         }
         .vt-badge {
           font-size: 13px;
@@ -333,11 +333,13 @@ export default function VsTrixta() {
         .vt-brand-inline {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
+          gap: 10px;
         }
         .vt-brand-inline img { height: 20px; width: auto; display: block; }
         .vt-brand-hero { display:flex; gap:12px; justify-content:center; margin-top:18px }
-        .vt-mini-logo { height:18px; width:auto; display:inline-block; vertical-align:middle }
+        .vt-mini-logo { height:50px; width:auto; display:inline-block; vertical-align:middle }
+        /* Synth logo – enlarged to stand out */
+        .vt-logo-synth { height:120px; width:auto; display:inline-block; vertical-align:middle }
 
         /* ── TL;DR callout ── */
         .vt-tldr {
@@ -412,7 +414,7 @@ export default function VsTrixta() {
           text-align: center;
           line-height: 1.7;
           max-width: 520px;
-          margin: 0 auto 44px;
+          margin: 0 auto 50px;
         }
 
         /* ── pricing cards ── */
@@ -494,7 +496,7 @@ export default function VsTrixta() {
           font-size: 12px;
           font-weight: 500;
           border-radius: 999px;
-          padding: 4px 12px;
+          padding: 6px 14px;
           display: inline-block;
         }
         .vt-pricing-card-trixta .vt-pricing-audience {
@@ -800,6 +802,9 @@ export default function VsTrixta() {
           .vt-sector-col-trixta { margin-right: 0; margin-bottom: 6px; }
           .vt-sector-col-synth  { margin-left: 0; }
           .vt-vc-points     { grid-template-columns: 1fr; }
+          /* On small screens, reduce Synth logo size a bit to avoid overflow */
+          .vt-logo-synth { height:90px; }
+          .vt-mini-logo { height:40px; }
         }
         @media (prefers-reduced-motion: reduce) {
           * { transition: none !important; }
@@ -827,7 +832,7 @@ export default function VsTrixta() {
               </div>
               <span className="vt-badge-vs">VS</span>
               <div className="vt-brand-inline" aria-hidden>
-                <img src="/logo.png" alt="Synth" className="vt-mini-logo" />
+                <img src="/logo.png" alt="Synth" className="vt-logo-synth" />
               </div>
             </div>
           </div>
@@ -890,7 +895,7 @@ export default function VsTrixta() {
                       "vt-winner-both"
                     }`}>
                       {s.winner === "synth"  ? (
-                        <span className="vt-brand-inline"><img src="/logo.png" alt="Synth" className="vt-mini-logo"/> Synth wins</span>
+                        <span className="vt-brand-inline"><img src="/logo.png" alt="Synth" className="vt-logo-synth"/> Synth wins</span>
                       ) : s.winner === "trixta" ? (
                         <span className="vt-brand-inline"><img src={encodeURI('/compare images/Trixta.jpg')} alt="Trixta" className="vt-mini-logo"/> wins</span>
                       ) : (
@@ -904,7 +909,7 @@ export default function VsTrixta() {
                       <p className="vt-sector-col-text">{s.trixta}</p>
                     </div>
                     <div className="vt-sector-col vt-sector-col-synth">
-                      <p className="vt-sector-col-label vt-brand-inline"><img src="/logo.png" alt="Synth" className="vt-mini-logo"/> <span>Synth</span></p>
+                      <p className="vt-sector-col-label vt-brand-inline"><img src="/logo.png" alt="Synth" className="vt-logo-synth"/> <span>Synth</span></p>
                       <p className="vt-sector-col-text">{s.synth}</p>
                     </div>
                   </div>
@@ -943,7 +948,7 @@ export default function VsTrixta() {
               <div className="vt-table-head">
                 <div className="vt-th vt-th-feature">Feature</div>
                 <div className="vt-th vt-th-trixta"><img src={encodeURI('/compare images/Trixta.jpg')} alt="Trixta" className="vt-mini-logo" /></div>
-                <div className="vt-th vt-th-synth">Synth</div>
+                <div className="vt-th vt-th-synth"><img src="/logo.png" alt="Synth" className="vt-logo-synth" /></div>
               </div>
 
               {visibleRows.map((row, i) => {

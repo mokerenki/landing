@@ -108,8 +108,9 @@ export function Navigation() {
                 <div className="absolute top-[calc(100%+8px)] left-0 bg-synth-surface border border-synth-border rounded-[16px] shadow-[0_12px_40px_rgba(0,0,0,0.10),0_2px_8px_rgba(0,0,0,0.04)] min-w-[200px] p-3 z-50 animate-fade-in">
                   <div className="mb-2 px-1">
                     <div className="text-[12px] font-semibold text-synth-text-1 uppercase tracking-[1px] mb-2">Compare</div>
-                    <Link href="/compare/vsChatgpt" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>VS ChatGPT</Link>
-                    <Link href="/compare/vsTrixta" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>VS Trixta</Link>
+                    {/* UPDATED PATHS TO MATCH ROUTING */}
+                    <Link href="/compare/vs-chatgpt" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>VS ChatGPT</Link>
+                    <Link href="/compare/vs-trixta" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>VS Trixta</Link>
                   </div>
                 </div>
               )}

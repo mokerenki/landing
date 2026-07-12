@@ -10,8 +10,10 @@ const solutions = [
 ]
 
 const compare = [
+  { label: "vs. Openclaw", href: "/compare/vsOpenclaw" },
   { label: "vs. ChatGPT", href: "/compare/vsChatgpt" },
-  { label: "vs. Trixta", href: "/compare/vsTrixta" }
+  { label: "vs. Trixta", href: "/compare/vsTrixta" },
+  { label: "vs. Nyla", href: "/compare/vsNyla" }
 ]
 
 const product = [
@@ -40,7 +42,7 @@ export function Footer() {
               synth<span className="text-indigo-600">.ai</span>
             </Link>
             <p className="text-[13px] text-synth-text-3 leading-[1.65] mt-2 max-w-[200px]">
-              Autonomous AI for every business function — delivered where you already work.
+              Bridging the GAP between thinking and doing(execution)—using the systems you already trust.
             </p>
           </div>
 

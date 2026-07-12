@@ -15,6 +15,11 @@ import Trust from "@/pages/Trust"
 import DataProcessing from "@/pages/Dataprocessing"
 import Terms from "@/pages/terms"
 import NotFound from "@/pages/NotFound"
+import VsOpenclaw from "@/pages/compare/vsOpenclaw"
+import VsChatgpt from "@/pages/compare/vsChatgpt"
+import VsTrixta from "@/pages/compare/vsTrixta"
+import VsNyla from "@/pages/compare/vsNyla"
+
 
 function Router() {
   return (
@@ -30,6 +35,10 @@ function Router() {
       <Route path="/trust" component={Trust} />
       <Route path="/data-processing" component={DataProcessing} />
       <Route path="/terms" component={Terms} />
+      <Route path="/compare/vsChatgpt" component={VsChatgpt} />
+      <Route path="/compare/vsOpenclaw" component={VsOpenclaw} />
+      <Route path="/compare/vsTrixta" component={VsTrixta} />
+      <Route path="/compare/vsNyla" component={VsNyla} />
       <Route component={NotFound} />
     </Switch>
   )

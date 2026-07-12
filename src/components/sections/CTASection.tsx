@@ -24,7 +24,7 @@ export function CTASection() {
       <div className="wrap relative z-10">
         <div className="bg-synth-surface border border-synth-border rounded-[22px] p-14 max-w-[600px] mx-auto text-center shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
           <h2 className="font-serif text-[36px] font-normal tracking-[-0.5px] text-synth-text-1 mb-3">
-            Bridging the gap between thinking and doing(execution)
+            This is what comes after software. Your business on autopilot, all in one platform.
           </h2>
           <p className="text-[15px] text-synth-text-2 leading-[1.7] mb-7">
             We're building something we'd want to use ourselves. you'll be first to get access when we launch, Join the waitlist!!

@@ -359,7 +359,7 @@ export default function VsChatGPT() {
           box-shadow: 0 6px 18px rgba(2,6,23,0.04);
           min-width: 160px;
         }
-        .brand-card img { height: 28px; width: auto; display: block; }
+        .brand-card img { height: 60px; width: auto; display: block; }
         .brand-name { font-weight: 600; color: #0A0D14; font-size: 14px; }
         .brand-name.small { color: #6B7280; font-weight:500; font-size:13px }
 
