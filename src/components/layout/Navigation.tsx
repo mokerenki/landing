@@ -91,7 +91,7 @@ export function Navigation() {
               )}
             </div>
 
-            <Link href="/features" className="px-3 py-1.5 rounded-md text-[14px] font-normal text-synth-text-2 hover:text-synth-text-1 hover:bg-black/[0.04] transition-colors">
+            <Link href="/pages/feature" className="px-3 py-1.5 rounded-md text-[14px] font-normal text-synth-text-2 hover:text-synth-text-1 hover:bg-black/[0.04] transition-colors">
               Features
             </Link>
 
@@ -109,8 +109,9 @@ export function Navigation() {
                   <div className="mb-2 px-1">
                     <div className="text-[12px] font-semibold text-synth-text-1 uppercase tracking-[1px] mb-2">Compare</div>
                     {/* UPDATED PATHS TO MATCH ROUTING */}
-                    <Link href="/compare/vs-chatgpt" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>VS ChatGPT</Link>
-                    <Link href="/compare/vs-trixta" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>VS Trixta</Link>
+                    <Link href="/compare/vsChatgpt" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>vs ChatGPT</Link>
+                    <Link href="/compare/vsOpenclaw" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>vs Openclaw</Link>
+                    <Link href="/compare/vsTrixta" className="block px-3 py-2 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors" onClick={() => setResourcesOpen(false)}>vs Trixta</Link>
                   </div>
                 </div>
               )}

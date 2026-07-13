@@ -64,22 +64,22 @@ export function HeroSection() {
             "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
         }}
       />
-
+   
       <div className="wrap relative z-10">
         <div className="text-center max-w-[800px] mx-auto">
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2 bg-synth-accent-light border border-synth-accent/20 text-synth-accent text-[13px] font-medium rounded-full px-4 py-1.5 mb-7">
             <div className="w-1.5 h-1.5 rounded-full bg-synth-accent animate-blink" />
-            Autonomous AI · Private Beta
+            Synth AI · Private Beta
           </div>
 
           {/* Headline */}
           <h1 className="font-serif text-[clamp(44px,6.5vw,80px)] font-normal leading-[1.06] tracking-[-2px] text-synth-text-1 mb-5">
-            Meet Synth.
+            Your autonomous Agent.
             <br />
-            The autonomous AI that{" "}
+            Your autonomus Agent that safes you time & {" "}
             <em className="text-synth-accent">gets work done </em>
-            for you
+            across:
           </h1>
 
           {/* Static vertical pill row */}
@@ -104,7 +104,7 @@ export function HeroSection() {
               <span className="text-[29px]">{currentChip.icon}</span>
               <span>{currentChip.text}</span>
             </div>
-            <span className="text-[17px] text-synth-text-2"> for you</span>
+            <span className="text-[17px] text-synth-text-2">for you</span>
           </div>
 
           {/* Form */}

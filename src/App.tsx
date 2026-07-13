@@ -19,6 +19,7 @@ import VsOpenclaw from "@/pages/compare/vsOpenclaw"
 import VsChatgpt from "@/pages/compare/vsChatgpt"
 import VsTrixta from "@/pages/compare/vsTrixta"
 import VsNyla from "@/pages/compare/vsNyla"
+import Features from "@/pages/feature"
 
 
 function Router() {
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/solutions/personal" component={Personal} />
       <Route path="/solutions/healthcare" component={Healthcare} />
       <Route path="/pricing" component={Pricing} />
+      <Route path="/pages/feature" component={Features} />
       <Route path="/trust" component={Trust} />
       <Route path="/data-processing" component={DataProcessing} />
       <Route path="/terms" component={Terms} />

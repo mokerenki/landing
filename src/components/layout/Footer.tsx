@@ -42,7 +42,7 @@ export function Footer() {
               synth<span className="text-indigo-600">.ai</span>
             </Link>
             <p className="text-[13px] text-synth-text-3 leading-[1.65] mt-2 max-w-[200px]">
-              Bridging the GAP between thinking and doing(execution)—using the systems you already trust.
+              Bridging the GAP between thinking and doing(execution).
             </p>
           </div>
 
