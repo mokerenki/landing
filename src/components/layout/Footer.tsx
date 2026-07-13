@@ -5,7 +5,7 @@ const solutions = [
   { label: "Sales", href: "/solutions/sales" },
   { label: "Finance", href: "/solutions/finance" },
   { label: "Product", href: "/solutions/product" },
-  { label: "Personal", href: "/solutions/personal" },
+  { label: "Executive Workflow", href: "/solutions/personal" },
   { label: "Healthcare Admin", href: "/solutions/healthcare" },
 ]
 

@@ -21,7 +21,7 @@ const verticals = [
   "Marketing",
   "Finance",
   "Product",
-  "Personal Assistance",
+  "Executive Workflow",
   "Healthcare Admin",
 ]
 
@@ -29,7 +29,9 @@ export function HeroSection() {
   const [chipIdx, setChipIdx] = useState(0)
   const [email, setEmail] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null)
 
+  // Rotate the chip carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setChipIdx((prev) => (prev + 1) % chips.length)
@@ -37,14 +39,35 @@ export function HeroSection() {
     return () => clearInterval(interval)
   }, [])
 
+  // Fetch live waitlist count from Netlify Function (optional – uncomment when function is deployed)
+  useEffect(() => {
+    fetch("/.netlify/functions/waitlist-count")
+      .then((res) => res.json())
+      .then((data) => setWaitlistCount(data.count))
+      .catch(() => setWaitlistCount(null))
+  }, [])
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!email.trim()) return
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setEmail("")
-    }, 4500)
+
+    // Send form data to Netlify
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        "form-name": "waitlist",
+        email: email.trim(),
+      }).toString(),
+    })
+      .then(() => {
+        setSubmitted(true)
+        setEmail("")
+        // Optimistically bump the count
+        if (waitlistCount !== null) setWaitlistCount((prev) => (prev ?? 0) + 1)
+        setTimeout(() => setSubmitted(false), 4500)
+      })
+      .catch((err) => console.error("Form submission error:", err))
   }
 
   const currentChip = chips[chipIdx]
@@ -64,22 +87,21 @@ export function HeroSection() {
             "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
         }}
       />
-   
+
       <div className="wrap relative z-10">
         <div className="text-center max-w-[800px] mx-auto">
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2 bg-synth-accent-light border border-synth-accent/20 text-synth-accent text-[13px] font-medium rounded-full px-4 py-1.5 mb-7">
             <div className="w-1.5 h-1.5 rounded-full bg-synth-accent animate-blink" />
-            Synth AI · Private Beta
+            Private beta. AI workforce
           </div>
 
           {/* Headline */}
           <h1 className="font-serif text-[clamp(44px,6.5vw,80px)] font-normal leading-[1.06] tracking-[-2px] text-synth-text-1 mb-5">
-            Your autonomous Agent.
+            Meet Synth.
             <br />
-            Your autonomus Agent that safes you time & {" "}
-            <em className="text-synth-accent">gets work done </em>
-            across:
+            Your AI workforce for every department.{" "}
+            <em className="text-synth-accent">Deploy autonomous agents</em> across:
           </h1>
 
           {/* Static vertical pill row */}
@@ -108,36 +130,51 @@ export function HeroSection() {
           </div>
 
           {/* Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="flex gap-2 max-w-[420px] mx-auto mb-3.5"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your work email"
-              required
-              autoComplete="email"
-              className="flex-1 bg-synth-surface border border-synth-border-med rounded-full px-5 py-3 text-[15px] text-synth-text-1 outline-none shadow-sm transition-all focus:border-synth-accent focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] placeholder:text-synth-text-3"
-            />
-            <button
-              type="submit"
-              disabled={submitted}
-              className={`text-white rounded-full px-6 py-3 text-[15px] font-medium whitespace-nowrap transition-colors ${
-                submitted
-                  ? "bg-synth-green"
-                  : "bg-synth-text-1 hover:bg-[#2A2835]"
-              }`}
-            >
-              {submitted ? "✓ You're on the list!" : "Get early access"}
-            </button>
-          </form>
+<form
+  name="waitlist"
+  method="POST"
+  data-netlify="true"
+  onSubmit={handleSubmit}
+  className="grid grid-cols-2 gap-2 max-w-[420px] mx-auto mb-3.5"
+>
+  {/* Netlify required hidden fields */}
+  <input type="hidden" name="form-name" value="waitlist" />
+  <input type="hidden" name="bot-field" />
+
+  <input
+    type="email"
+    name="email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    placeholder="Enter your work email"
+    required
+    autoComplete="email"
+    className="w-full bg-synth-surface border border-synth-border-med rounded-full px-5 py-3 text-[15px] text-synth-text-1 outline-none shadow-sm transition-all focus:border-synth-accent focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] placeholder:text-synth-text-3"
+  />
+  <button
+    type="submit"
+    disabled={submitted}
+    className={`w-full text-white rounded-full px-4 py-3 text-[15px] font-medium whitespace-nowrap transition-colors ${
+      submitted
+        ? "bg-synth-green"
+        : "bg-synth-text-1 hover:bg-[#2A2835]"
+    }`}
+  >
+    {submitted ? "✓ You're on the list!" : "Get early access"}
+  </button>
+</form>
+
           <p className="text-[13px] text-synth-text-3">
-            <strong className="text-synth-text-2 font-medium">
-              2,240 people
-            </strong>{" "}
-            already on the waitlist· 
+            {waitlistCount !== null ? (
+              <strong className="text-synth-text-2 font-medium">
+                {waitlistCount.toLocaleString()} people
+              </strong>
+            ) : (
+              <strong className="text-synth-text-2 font-medium">
+                2,240 people
+              </strong>
+            )}{" "}
+            already on the waitlist ·{" "}
           </p>
         </div>
       </div>

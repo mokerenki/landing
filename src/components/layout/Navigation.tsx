@@ -8,7 +8,7 @@ const solutions = [
   { label: "Sales", desc: "Your pipeline, researched and ready before you wake up. Increase revenue", icon: "🤝", href: "/solutions/sales" },
   { label: "Finance", desc: "Analysis that used to take your team a week", icon: "💹", href: "/solutions/finance" },
   { label: "Product", desc: "Strategy, roadmap, discovery, onboarding & customer support ", icon: "🛍️", href: "/solutions/product" },
-  { label: "Personal", desc: "Plans your day. Handles your tasks. Learns your life", icon: "🙋", href: "/solutions/personal" },
+  { label: "Executive Workflow", desc: "Plans your day. Handles your tasks. Learns your life", icon: "🙋", href: "/solutions/personal" },
   { label: "Healthcare Admin", desc: "Claims, denials, scheduling & more", icon: "🏥", href: "/solutions/healthcare" },
 ]
 
