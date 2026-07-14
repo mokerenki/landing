@@ -164,11 +164,11 @@ export function Navigation() {
             </Link>
           ))}
           <div className="border-t border-synth-border my-2" />
-          <Link href="/features" className="block px-3 py-2.5 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors">Features</Link>
+          <Link href="/pages/feature" className="block px-3 py-2.5 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors">Features</Link>
           <Link href="/pricing" className="block px-3 py-2.5 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors">Pricing</Link>
           <a href="mailto:hello@synth.ai" className="block px-3 py-2.5 text-[14px] text-synth-text-2 rounded-md hover:bg-synth-surface-2 hover:text-synth-text-1 transition-colors">Enterprise</a>
           <div className="border-t border-synth-border my-2 pt-2">
-            <a href="mailto:hello@synth.ai" className="block w-full text-left px-3 py-2.5 text-[14px] text-synth-text-2">Contact us</a>
+            <a href="mailto:hello@synthai.world" className="block w-full text-left px-3 py-2.5 text-[14px] text-synth-text-2">Contact us</a>
             <Link href="/#waitlist" className="block w-full text-center mt-2 text-[14px] font-medium text-white px-4 py-2.5 rounded-full bg-synth-text-1">Join waitlist</Link>
           </div>
         </div>

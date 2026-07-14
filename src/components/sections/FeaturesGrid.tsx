@@ -175,22 +175,35 @@ export function FeaturesGrid() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-max">
               {activeCategory?.tools.map((tool, index) => {
-                // Create variance in sizes and positions
+                // Pastel background mapping for tool cards
+                const colorMap: Record<string, string> = {
+                  'Deep Research':       'bg-blue-50',
+                  'Data Analysis':       'bg-amber-50',
+                  'Long-term Memory':    'bg-purple-50',
+                  'Scheduling':          'bg-gray-100',
+                  'Documents':           'bg-green-50',
+                  'Automations':         'bg-orange-50',
+                  'Communications':      'bg-teal-50',
+                  'WhatsApp / Instagram':'bg-pink-50',
+                  'Browser Agent':       'bg-indigo-50',
+                }
+                const toolBg = colorMap[tool.name] ?? 'bg-synth-surface'
+
                 const isLarge = index === 0
                 const isWide = index === activeCategory.tools.length - 1 && activeCategory.tools.length % 2 === 1
 
                 return (
                   <div
                     key={tool.name}
-                    className={`group relative overflow-hidden rounded-2xl border border-synth-border bg-gradient-to-br from-synth-surface to-synth-surface/50 p-6 transition-all duration-500 hover:shadow-xl hover:border-synth-accent/40 hover:scale-105 ${
+                    className={`group relative overflow-hidden rounded-2xl border border-synth-border ${toolBg} transition-all duration-500 hover:shadow-xl hover:border-synth-accent/40 hover:scale-105 ${
                       isLarge ? 'md:col-span-1 md:row-span-2' : ''
                     } ${isWide ? 'lg:col-span-2' : ''}`}
                   >
-                    {/* Animated background gradient */}
+                    {/* Animated background gradient on hover */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-synth-accent/5 to-transparent pointer-events-none" />
 
                     {/* Content */}
-                    <div className={`relative z-10 flex flex-col ${isLarge ? 'h-full justify-between' : ''}`}>
+                    <div className={`relative z-10 flex flex-col p-6 ${isLarge ? 'h-full justify-between' : ''}`}>
                       <div>
                         <div
                           className={`mb-4 transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6 origin-left ${
