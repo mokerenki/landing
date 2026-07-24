@@ -28,8 +28,8 @@ const pillars = [
   },
   {
     icon: FileCheck,
-    title: "SOC 2 Type II certified",
-    desc: "Independently audited annually. Full report available under NDA. We maintain the highest standards for security, availability, and confidentiality.",
+    title: "SOC 2 Type II readiness underway",
+    desc: "SOC 2 Type II audit in progress.  Full report available under NDA. We maintain the highest standards for security, availability, and confidentiality.",
   },
 ]
 

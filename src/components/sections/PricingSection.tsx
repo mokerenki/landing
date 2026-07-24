@@ -21,7 +21,7 @@ const plans = [
     monthly: 15,
     annual: 12.5, // $150 / 12 approx
     desc: 'Standard monthly usage',
-    cta: 'Get started',
+    cta: 'Reserve spot',
     featured: false,
     credits: '4,000 credits per month',
     features: [
@@ -41,7 +41,7 @@ const plans = [
     monthly: 35,
     annual: 29.1666, // $350 / 12 approx
     desc: 'Customizable monthly usage',
-    cta: 'Get started',
+    cta: 'Reserve spot',
     featured: true,
     credits: '8,000 credits / month',
     features: [
@@ -61,7 +61,7 @@ const plans = [
     monthly: 170,
     annual: 141.6666, // $1700 / 12 approx
     desc: 'Extended usage for productivity',
-    cta: 'Get started',
+    cta: 'Reserve spot',
     featured: false,
     credits: '40,000 credits / month',
     specialFeature: { icon: Monitor, text: 'Free Cloud Computer', color: 'text-blue-500' },
@@ -175,7 +175,7 @@ export function PricingSection() {
               </div>
             </div>
             <a href="/#waitlist" className="px-6 py-2.5 bg-white border border-gray-200 rounded-xl font-medium text-gray-900 hover:bg-gray-50 transition-all">
-              Get Team
+              Team plans
             </a>
           </div>
 

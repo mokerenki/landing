@@ -113,7 +113,7 @@ export default function DataProcessing() {
               <div className="p-6 border border-gray-100 rounded-2xl">
                 <Server className="w-8 h-8 text-gray-400 mb-4" />
                 <h4 className="font-bold mb-2">AWS Infrastructure</h4>
-                <p className="text-xs text-gray-500">Stored in regions selected by you at deployment time.</p>
+                <p className="text-xs text-gray-500">Stored in infrastructures that comply with data protection regulations.</p>
               </div>
               <div className="p-6 border border-gray-100 rounded-2xl">
                 <Lock className="w-8 h-8 text-gray-400 mb-4" />
@@ -136,7 +136,7 @@ export default function DataProcessing() {
             <div className="space-y-2">
               <p className="font-bold text-indigo-900">Synth AI (Pty) Ltd</p>
               <a href="mailto:privacy@synth.ai" className="text-indigo-600 font-bold hover:underline">
-                privacy@synth.ai
+                Hello@synthai.world
               </a>
               <p className="text-sm text-indigo-900/50 mt-4">Cape Town, South Africa</p>
             </div>

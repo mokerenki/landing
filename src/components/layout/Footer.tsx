@@ -17,18 +17,16 @@ const compare = [
 ]
 
 const product = [
-  { label: "Features", href: "/#features" },
+  { label: "Features", href: "/pages/feature" },
   { label: "Pricing", href: "/pricing" },
   { label: "API", href: "/api-docs" },
   { label: "Custom MCPs", href: "/mcp" }
 ]
 
 const legal = [
-  { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },
   { label: "POPIA Compliance", href: "/data-processing" },
   { label: "Data Processing", href: "/data-processing" },
-  { label: "Cookie Policy", href: "/cookies" }
 ]
 
 export function Footer() {
@@ -39,7 +37,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="font-serif text-[22px] text-synth-text-1 tracking-[-0.3px] font-medium">
-              synth<span className="text-indigo-600">.ai</span>
+              Synth<span className="text-indigo-600">.AI</span>
             </Link>
             <p className="text-[13px] text-synth-text-3 leading-[1.65] mt-2 max-w-[200px]">
               Bridging the GAP between thinking and doing(execution).
@@ -106,7 +104,7 @@ export function Footer() {
         <div className="border-t border-synth-border pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
           <p className="text-[12px] text-synth-text-3">© 2026 Synth AI · hello@synthai.world</p>
           <div className="flex gap-3">
-            {["LinkedIn", "X / Twitter", "Instagram", "WhatsApp"].map((item) => (
+            {["LinkedIn", "X / Twitter", "Instagram"].map((item) => (
               <a key={item} href="#" className="text-[12px] text-synth-text-3 hover:text-synth-text-1 transition-colors">{item}</a>
             ))}
           </div>

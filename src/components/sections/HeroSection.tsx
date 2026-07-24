@@ -3,15 +3,15 @@ import { useState, useEffect, FormEvent } from "react"
 const chips = [
   { icon: "📑", text: "Find new government and private tenders every morning" },
   { icon: "🏭", text: "Identify cheaper suppliers and negotiate better quotes" },
-  { icon: "✍️", text: "Create a week's worth of LinkedIn posts from our blog" },
+  { icon: "✍️", text: "Create a week's worth of LinkedIn posts " },
   { icon: "🎥", text: "Analyze top-performing TikTok videos and recommend winning hooks" },
-  { icon: "📊", text: "Monitor our competitors and report every major change" },
+  { icon: "📊", text: "Monitor your competitors and report every major change" },
   { icon: "💰", text: "Generate weekly cash flow forecasts from our accounting data" },
   { icon: "🤝", text: "Find, enrich and qualify 500 potential customers" },
   { icon: "📢", text: "Plan, create and launch our next marketing campaign" },
-  { icon: "📄", text: "Review contracts and flag legal risks before signing" },
+  { icon: "📄", text: "Review documents and flag legal risks before signing" },
   { icon: "📦", text: "Monitor inventory and automatically reorder low stock" },
-  { icon: "🎥", text: "Turn webinars into short-form videos and captions" },
+  { icon: "🎥", text: "analyse how your ads across meta are doing" },
   { icon: "🚚", text: "Track delayed shipments and notify affected customers" },
   { icon: "📈", text: "Research a new market and deliver a complete expansion report" },
 ]
@@ -171,7 +171,7 @@ export function HeroSection() {
               </strong>
             ) : (
               <strong className="text-synth-text-2 font-medium">
-                2,240 people
+                2,272 people
               </strong>
             )}{" "}
             already on the waitlist ·{" "}

@@ -43,7 +43,7 @@ export default function Terms() {
           <section className="mb-12">
             <h2 className="text-2xl font-serif font-medium text-gray-900 mb-6 border-b border-gray-100 pb-2">3. User Accounts</h2>
             <p className="text-gray-600 mb-4">
-              You must be at least 18 years old to use Synth. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.
+               You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.
             </p>
           </section>
 
@@ -81,10 +81,10 @@ export default function Terms() {
           <section className="mb-12 bg-gray-50 p-8 rounded-3xl border border-gray-100">
             <h2 className="text-xl font-serif font-medium text-gray-900 mb-4">Questions?</h2>
             <p className="text-gray-600 mb-6">
-              If you have any questions about these Terms, please contact our legal team.
+              If you have any questions about these Terms, please contact our  team.
             </p>
             <a href="mailto:legal@synth.ai" className="inline-flex items-center text-indigo-600 font-bold hover:underline">
-              legal@synth.ai
+              Hello@synthai.world
             </a>
           </section>
         </div>
