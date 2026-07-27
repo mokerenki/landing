@@ -12,7 +12,7 @@ const solutions = [
 
 export function SolutionCards() {
   return (
-    <section className="relative py-24 border-t border-synth-border sky-gradient overflow-hidden">
+    <section className="relative py-24 border-t border-synth-border" style={{ backgroundColor: '#F4F6F8' }}>
       <div className="wrap relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <p className="text-[13px] uppercase tracking-[2px] text-synth-text-3 mb-4">Built for every business function</p>

@@ -1,20 +1,4 @@
-import { useState, useEffect, FormEvent } from "react"
-
-const chips = [
-  { icon: "📑", text: "Find new government and private tenders every morning" },
-  { icon: "🏭", text: "Identify cheaper suppliers and negotiate better quotes" },
-  { icon: "✍️", text: "Create a week's worth of LinkedIn posts " },
-  { icon: "🎥", text: "Analyze top-performing TikTok videos and recommend winning hooks" },
-  { icon: "📊", text: "Monitor your competitors and report every major change" },
-  { icon: "💰", text: "Generate weekly cash flow forecasts from our accounting data" },
-  { icon: "🤝", text: "Find, enrich and qualify 500 potential customers" },
-  { icon: "📢", text: "Plan, create and launch our next marketing campaign" },
-  { icon: "📄", text: "Review documents and flag legal risks before signing" },
-  { icon: "📦", text: "Monitor inventory and automatically reorder low stock" },
-  { icon: "🎥", text: "analyse how your ads across meta are doing" },
-  { icon: "🚚", text: "Track delayed shipments and notify affected customers" },
-  { icon: "📈", text: "Research a new market and deliver a complete expansion report" },
-]
+import { useState, useEffect, useRef, FormEvent } from "react"
 
 const verticals = [
   "Sales",
@@ -25,21 +9,175 @@ const verticals = [
   "Healthcare Admin",
 ]
 
+// Muted, brand-aligned particle palette — kept desaturated so it reads as
+// "premium ambient motion" rather than a game/confetti effect.
+const PARTICLE_COLORS = ["#1E3A8A", "#2563EB", "#93C5FD", "#818CF8"]
+
+const PARTICLE_COUNT = 95
+const CURSOR_RADIUS = 140 // how far the cursor's force field reaches
+const REPEL_STRENGTH = 900 // higher = stronger push
+const SPRING_STRENGTH = 0.012 // pull back toward home position
+const DAMPING = 0.94 // velocity decay per frame (inertia/friction)
+
+type Particle = {
+  x: number
+  y: number
+  homeX: number
+  homeY: number
+  vx: number
+  vy: number
+  mass: number
+  size: number
+  color: string
+  driftPhase: number
+  driftSpeed: number
+}
+
+function useParticleField(sectionRef: React.RefObject<HTMLElement>) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const particlesRef = useRef<Particle[]>([])
+  const mouseRef = useRef<{ x: number; y: number; active: boolean }>({ x: 0, y: 0, active: false })
+  const rafRef = useRef<number>()
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const section = sectionRef.current
+    if (!canvas || !section) return
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    const seedParticles = (width: number, height: number) => {
+      particlesRef.current = Array.from({ length: PARTICLE_COUNT }, () => {
+        const homeX = Math.random() * width
+        const homeY = Math.random() * height
+        const mass = 0.6 + Math.random() * 1.4
+        return {
+          x: homeX,
+          y: homeY,
+          homeX,
+          homeY,
+          vx: 0,
+          vy: 0,
+          mass,
+          size: 1.2 + (1 / mass) * 1.6,
+          color: PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
+          driftPhase: Math.random() * Math.PI * 2,
+          driftSpeed: 0.15 + Math.random() * 0.25,
+        }
+      })
+    }
+
+    const resize = () => {
+      const rect = section.getBoundingClientRect()
+      canvas.width = rect.width * window.devicePixelRatio
+      canvas.height = rect.height * window.devicePixelRatio
+      canvas.style.width = `${rect.width}px`
+      canvas.style.height = `${rect.height}px`
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+      seedParticles(rect.width, rect.height)
+    }
+    resize()
+    window.addEventListener("resize", resize)
+
+    const handleMove = (clientX: number, clientY: number) => {
+      const rect = section.getBoundingClientRect()
+      mouseRef.current = { x: clientX - rect.left, y: clientY - rect.top, active: true }
+    }
+    const onMouseMove = (e: MouseEvent) => handleMove(e.clientX, e.clientY)
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches[0]) handleMove(e.touches[0].clientX, e.touches[0].clientY)
+    }
+    const onLeave = () => {
+      mouseRef.current.active = false
+    }
+
+    section.addEventListener("mousemove", onMouseMove)
+    section.addEventListener("touchmove", onTouchMove)
+    section.addEventListener("mouseleave", onLeave)
+    section.addEventListener("touchend", onLeave)
+
+    let frame = 0
+    const draw = () => {
+      const rect = section.getBoundingClientRect()
+      ctx.clearRect(0, 0, rect.width, rect.height)
+      frame += 1
+
+      const mouse = mouseRef.current
+
+      for (const p of particlesRef.current) {
+        // Gentle idle wander so the field feels alive even without cursor input
+        if (!prefersReducedMotion) {
+          p.driftPhase += 0.01 * p.driftSpeed
+          const driftX = Math.cos(p.driftPhase) * 0.15
+          const driftY = Math.sin(p.driftPhase * 1.3) * 0.15
+
+          // Spring force pulling particle back toward its home position
+          const toHomeX = (p.homeX - p.x) * SPRING_STRENGTH
+          const toHomeY = (p.homeY - p.y) * SPRING_STRENGTH
+
+          let forceX = toHomeX + driftX
+          let forceY = toHomeY + driftY
+
+          // Cursor repulsion field — "floating gravity" push
+          if (mouse.active) {
+            const dx = p.x - mouse.x
+            const dy = p.y - mouse.y
+            const distSq = dx * dx + dy * dy
+            const dist = Math.sqrt(distSq) || 0.001
+            if (dist < CURSOR_RADIUS) {
+              const falloff = 1 - dist / CURSOR_RADIUS
+              const push = (REPEL_STRENGTH * falloff * falloff) / (p.mass * dist)
+              forceX += dx * push * 0.016
+              forceY += dy * push * 0.016
+            }
+          }
+
+          p.vx = (p.vx + forceX / p.mass) * DAMPING
+          p.vy = (p.vy + forceY / p.mass) * DAMPING
+          p.x += p.vx
+          p.y += p.vy
+        }
+
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+        ctx.fillStyle = p.color
+        ctx.globalAlpha = 0.65
+        ctx.shadowColor = p.color
+        ctx.shadowBlur = 6
+        ctx.fill()
+      }
+      ctx.globalAlpha = 1
+      ctx.shadowBlur = 0
+
+      rafRef.current = requestAnimationFrame(draw)
+    }
+    rafRef.current = requestAnimationFrame(draw)
+
+    return () => {
+      window.removeEventListener("resize", resize)
+      section.removeEventListener("mousemove", onMouseMove)
+      section.removeEventListener("touchmove", onTouchMove)
+      section.removeEventListener("mouseleave", onLeave)
+      section.removeEventListener("touchend", onLeave)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [sectionRef])
+
+  return canvasRef
+}
+
 export function HeroSection() {
-  const [chipIdx, setChipIdx] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const canvasRef = useParticleField(sectionRef)
+
   const [email, setEmail] = useState("")
   const [submitted, setSubmitted] = useState(false)
   const [waitlistCount, setWaitlistCount] = useState<number | null>(null)
 
-  // Rotate the chip carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setChipIdx((prev) => (prev + 1) % chips.length)
-    }, 3200)
-    return () => clearInterval(interval)
-  }, [])
-
-  // Fetch live waitlist count from Netlify Function (optional – uncomment when function is deployed)
   useEffect(() => {
     fetch("/.netlify/functions/waitlist-count")
       .then((res) => res.json())
@@ -51,7 +189,6 @@ export function HeroSection() {
     e.preventDefault()
     if (!email.trim()) return
 
-    // Send form data to Netlify
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -63,17 +200,17 @@ export function HeroSection() {
       .then(() => {
         setSubmitted(true)
         setEmail("")
-        // Optimistically bump the count
         if (waitlistCount !== null) setWaitlistCount((prev) => (prev ?? 0) + 1)
         setTimeout(() => setSubmitted(false), 4500)
       })
       .catch((err) => console.error("Form submission error:", err))
   }
 
-  const currentChip = chips[chipIdx]
-
   return (
-    <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative pt-28 pb-24 lg:pt-36 lg:pb-32 overflow-hidden"
+    >
       {/* Dot grid background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -88,81 +225,76 @@ export function HeroSection() {
         }}
       />
 
+      {/* Mouse-trailing particle canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none z-[1]"
+      />
+
       <div className="wrap relative z-10">
-        <div className="text-center max-w-[800px] mx-auto">
+        <div className="text-center max-w-[760px] mx-auto">
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 bg-synth-accent-light border border-synth-accent/20 text-synth-accent text-[13px] font-medium rounded-full px-4 py-1.5 mb-7">
+          <div className="inline-flex items-center gap-2 bg-synth-accent-light border border-synth-accent/20 text-synth-accent text-[13px] font-medium rounded-full px-4 py-1.5 mb-9">
             <div className="w-1.5 h-1.5 rounded-full bg-synth-accent animate-blink" />
-            Private beta. AI workforce
+            Autonomous AI workforce
           </div>
 
-          {/* Headline */}
-          <h1 className="font-serif text-[clamp(44px,6.5vw,80px)] font-normal leading-[1.06] tracking-[-2px] text-synth-text-1 mb-5">
+          {/* Headline — exactly three lines */}
+          <h1 className="font-serif text-[clamp(40px,6vw,72px)] font-normal leading-[1.14] tracking-[-1.5px] text-synth-text-1 mb-10">
             Meet Synth.
             <br />
-            Your AI workforce for every department.{" "}
-            <em className="text-synth-accent">Deploy autonomous agents</em> across:
+            You run the business — 
+            <br />
+            <em className="text-synth-accent not-italic">
+              it runs the rest.
+            </em>
           </h1>
 
-          {/* Static vertical pill row */}
-          <div className="flex justify-center flex-wrap gap-2 mb-8">
-            {verticals.map((v) => (
-              <span
-                key={v}
-                className="bg-synth-surface border border-synth-border-med rounded-full px-3 py-0.5 text-xs text-synth-text-2"
-              >
-                {v}
+          {/* Restyled department list — a single breathing line, not a wall of boxes */}
+          <div className="flex justify-center items-center flex-wrap gap-x-3 gap-y-2 mb-12 text-[13px] font-medium text-synth-text-3 tracking-wide">
+            {verticals.map((v, i) => (
+              <span key={v} className="flex items-center gap-3">
+                <span className="hover:text-synth-accent transition-colors cursor-default">
+                  {v}
+                </span>
+                {i < verticals.length - 1 && (
+                  <span className="w-1 h-1 rounded-full bg-synth-border-med" />
+                )}
               </span>
             ))}
           </div>
 
-          {/* Chip carousel */}
-          <div className="flex items-center justify-center gap-2.5 mb-8 flex-wrap">
-            <span className="text-[17px] text-synth-text-2">Watch it</span>
-            <div
-              className="inline-flex items-center gap-1.5 bg-synth-surface border border-synth-border-med rounded-full px-3.5 py-1.5 text-[14px] font-medium text-synth-text-1 shadow-sm transition-all duration-300"
-              key={chipIdx}
-            >
-              <span className="text-[29px]">{currentChip.icon}</span>
-              <span>{currentChip.text}</span>
-            </div>
-            <span className="text-[17px] text-synth-text-2">for you</span>
-          </div>
-
           {/* Form */}
-<form
-  name="waitlist"
-  method="POST"
-  data-netlify="true"
-  onSubmit={handleSubmit}
-  className="grid grid-cols-2 gap-2 max-w-[420px] mx-auto mb-3.5"
->
-  {/* Netlify required hidden fields */}
-  <input type="hidden" name="form-name" value="waitlist" />
-  <input type="hidden" name="bot-field" />
+          <form
+            name="waitlist"
+            method="POST"
+            data-netlify="true"
+            onSubmit={handleSubmit}
+            className="grid grid-cols-2 gap-2 max-w-[420px] mx-auto mb-3.5"
+          >
+            <input type="hidden" name="form-name" value="waitlist" />
+            <input type="hidden" name="bot-field" />
 
-  <input
-    type="email"
-    name="email"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    placeholder="Enter your work email"
-    required
-    autoComplete="email"
-    className="w-full bg-synth-surface border border-synth-border-med rounded-full px-5 py-3 text-[15px] text-synth-text-1 outline-none shadow-sm transition-all focus:border-synth-accent focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] placeholder:text-synth-text-3"
-  />
-  <button
-    type="submit"
-    disabled={submitted}
-    className={`w-full text-white rounded-full px-4 py-3 text-[15px] font-medium whitespace-nowrap transition-colors ${
-      submitted
-        ? "bg-synth-green"
-        : "bg-synth-text-1 hover:bg-[#2A2835]"
-    }`}
-  >
-    {submitted ? "✓ You're on the list!" : "Get early access"}
-  </button>
-</form>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your work email"
+              required
+              autoComplete="email"
+              className="w-full bg-synth-surface border border-synth-border-med rounded-full px-5 py-3 text-[15px] text-synth-text-1 outline-none shadow-sm transition-all focus:border-synth-accent focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] placeholder:text-synth-text-3"
+            />
+            <button
+              type="submit"
+              disabled={submitted}
+              className={`w-full text-white rounded-full px-4 py-3 text-[15px] font-medium whitespace-nowrap transition-colors ${
+                submitted ? "bg-synth-green" : "bg-synth-text-1 hover:bg-[#2A2835]"
+              }`}
+            >
+              {submitted ? "✓ You're on the list!" : "Get early access"}
+            </button>
+          </form>
 
           <p className="text-[13px] text-synth-text-3">
             {waitlistCount !== null ? (
@@ -170,9 +302,7 @@ export function HeroSection() {
                 {waitlistCount.toLocaleString()} people
               </strong>
             ) : (
-              <strong className="text-synth-text-2 font-medium">
-                2,272 people
-              </strong>
+              <strong className="text-synth-text-2 font-medium">2,272 people</strong>
             )}{" "}
             already on the waitlist ·{" "}
           </p>

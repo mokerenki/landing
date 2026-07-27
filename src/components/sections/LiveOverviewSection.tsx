@@ -1,189 +1,304 @@
-import { Clock, MessageCircle, AlertTriangle, UserPlus, Airplay, ArrowRight } from "lucide-react"
+'use client'
+
+import { useRef, useState } from "react"
+import { Clock, AlertTriangle, UserPlus, Airplay, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { Link } from "wouter"
 
 const dailyItems = [
-  { time: "8:00 AM", title: "Review marketing campaign draft — Q3 launch", detail: "Synth already pulled last quarter's top performers and drafted 3 creative routes based on those hooks.", status: "Prepped", statusColor: "bg-blue-100 text-blue-700" },
-  { time: "10:00 AM", title: "Sales enablement — competitor battle cards", detail: "Acme Corp just dropped a new pricing page. Synth captured the changes and is building a side-by-side comparison for your 10 AM pitch.", status: "Urgent", statusColor: "bg-red-100 text-red-700" },
-  { time: "1:00 PM", title: "Product sync — roadmap update", detail: "Synth correlated user feedback from 400 support tickets and flagged the 3 most requested features for the sprint planning meeting.", status: "Focus", statusColor: "bg-emerald-100 text-emerald-700" },
-  { time: "4:00 PM", title: "Finance report — weekly cash flow", detail: "Synth compiled the latest AR/AP data and spotted an upcoming cash gap. It's drafted a recommendation to pull forward invoice #1243.", status: "Review", statusColor: "bg-amber-100 text-amber-700" },
+  { time: "5:00 AM", title: "Review marketing campaign draft — Q3 launch", detail: "Pulled last quarter's top performers, drafted 3 creative routes.", tag: "marketing" },
+  { time: "10:00 AM", title: "Sales enablement — competitor battle cards", detail: "Acme dropped a new pricing page — comparison ready for your 10 AM.", tag: "sales" },
+  { time: "1:00 PM", title: "Product sync — roadmap update", detail: "Correlated 400 support tickets, flagged 3 requested features.", tag: "product" },
+  { time: "4:00 PM", title: "Finance report — weekly cash flow", detail: "Spotted an upcoming cash gap, drafted a recommendation.", tag: "finance" },
 ]
 
 const alerts = [
   {
     icon: AlertTriangle,
-    title: "Negative sentiment spike — @synthai on X",
-    desc: "Mentions are up 340% in 2 hours. Top complaint: login not working on Safari. Synth already drafted a response thread and alerted the engineering on-call.",
+    title: "Negative comments spike — @synthai on X",
+    desc: "Mentions up 340% in 2 hours. Response thread drafted, engineering alerted.",
+    tag: "brand risk",
     primary: "Approve response",
     secondary: "See thread",
-    accent: "bg-blue-600 text-white",
   },
   {
     icon: UserPlus,
-    title: "High‑intent leads detected — competitor dissatisfaction on Instagram",
-    desc: "7 users complained about YWXB’s product quality in the last 2 hours. I’ve identified 5 that match your ideal customer profile and drafted personalised outreach. Want me to send the first message?",
+    title: "High-intent leads — competitor dissatisfaction on Instagram",
+    desc: "7 users complained about a rival's product. 5 match your ICP, outreach drafted.",
+    tag: "sales",
     primary: "Send messages",
     secondary: "Ignore",
-    accent: "bg-emerald-600 text-white",
   },
   {
     icon: Clock,
     title: "RFP deadline — 90 minutes remaining",
-    desc: "The Acme RFP response is 80% complete. Synth has pulled the missing compliance docs and flagged the sections that still need your approval.",
+    desc: "Acme RFP is 80% complete. Missing compliance docs pulled in.",
+    tag: "deadline",
     primary: "Open draft",
     secondary: "Snooze 30 min",
-    accent: "bg-blue-600 text-white",
   },
   {
     icon: Airplay,
-    title: "Top 3 TikTok hooks this week — marketing ready",
-    desc: "analyzed the best-performing hooks in your niche and flagged 3 you can adapt for the product launch video. Watch them now?",
+    title: "Top 3 TikTok hooks this week",
+    desc: "Best-performing hooks in your niche, ready to adapt for launch video.",
+    tag: "marketing",
     primary: "View hooks",
     secondary: "Send to editor",
-    accent: "bg-emerald-600 text-white",
   },
 ]
 
-export function LiveOverviewSection() {
+const chatLog = [
+  { from: "synth", text: "Acme just launched pricing 20% below yours at the low end. Their new blog post targets your top 3 keywords — I've drafted a response article. Sentiment on your last release is 89% positive." },
+  { from: "user", text: "What's on my plate today, anything before the all-hands?" },
+  { from: "user", text: "Also pull the latest NPS scores into the board deck." },
+  { from: "synth", text: "Done — NPS is in the deck with 4 key drivers highlighted. Your 10 AM competitor update is ready when you are." },
+]
+
+const pages = [
+  { key: "glance", eyebrow: "BUSINESS · OVERVIEW", title: "Good morning." },
+  { key: "alerts", eyebrow: "BUSINESS · ALERTS", title: "Heads up." },
+  { key: "ask", eyebrow: "BUSINESS · ASK", title: "Ask it anything." },
+]
+
+function CardShell({
+  children,
+  eyebrow,
+  title,
+  ctaLabel,
+}: {
+  children: React.ReactNode
+  eyebrow: string
+  title: string
+  ctaLabel: string
+}) {
   return (
-    <section className="py-24 bg-synth-surface">
-      <div className="wrap">
-        <div className="grid gap-20">
-          <div>
-            <p className="text-[12px] font-semibold uppercase tracking-[2px] text-synth-accent mb-4">
-              YOUR WORK, AUTONOMOUSLY HANDLED
-            </p>
-            <h2 className="font-display text-[clamp(38px,4.8vw,56px)] font-semibold tracking-[-0.04em] text-synth-text-1 max-w-[780px]">
-              Synth briefs you every morning
-            </h2>
-            <p className="mt-5 max-w-3xl text-[17px] text-synth-text-2 leading-[1.8]">
-              Before your team logs in, Synth has already scanned your tools, flagged threats and opportunities, and prepared a prioritized action plan — so you can jump straight into execution.
-            </p>
+    <div className="flex h-full flex-col rounded-[28px] bg-white p-7 shadow-[0_30px_80px_rgba(10,17,30,0.35)]">
+      <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+        <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-slate-400">{eyebrow}</span>
+        <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-slate-400">Mon · 06:15</span>
+      </div>
+      <div className="mt-4 flex items-center gap-2">
+        <span className="rounded-md bg-[#0A111E] px-2 py-1 text-[11px] font-bold text-white">Synth OS</span>
+        <span className="text-[13px] text-slate-400">Daily Briefing</span>
+      </div>
+      <h3 className="mt-5 text-[26px] font-semibold tracking-[-0.02em] text-slate-900">{title}</h3>
+      <div className="mt-4 flex-1 space-y-4 overflow-y-auto pr-1">{children}</div>
+      <button className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#0A111E] px-5 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.03]">
+        {ctaLabel}
+        <ArrowRight className="h-4 w-4" />
+      </button>
+    </div>
+  )
+}
+
+export function LiveOverviewSection() {
+  const [active, setActive] = useState(0)
+  const touchStartX = useRef<number | null>(null)
+
+  const next = () => setActive((i) => Math.min(i + 1, pages.length - 1))
+  const prev = () => setActive((i) => Math.max(i - 1, 0))
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const delta = e.changedTouches[0].clientX - touchStartX.current
+    if (delta < -50) next()
+    if (delta > 50) prev()
+    touchStartX.current = null
+  }
+
+  return (
+    <section
+      className="relative overflow-hidden py-28"
+      style={{
+        background:
+          "linear-gradient(180deg, #0A111E 0%, #162032 16%, #2B384E 30%, #4A5A73 44%, #7D818A 56%, #A88E81 66%, #D88A58 76%, #E87328 86%, #F25C05 94%, #FA7D00 100%)",
+      }}
+    >
+      {/* Mountain silhouette + water reflection at the base */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40">
+        <svg viewBox="0 0 1440 160" preserveAspectRatio="none" className="h-full w-full">
+          <polygon
+            points="0,120 120,70 260,110 380,55 520,100 660,40 820,95 980,60 1120,105 1260,50 1440,90 1440,160 0,160"
+            fill="#1C1614"
+          />
+        </svg>
+        <div
+          className="absolute inset-x-0 bottom-0 h-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #1C1614 0%, #3A2518 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 h-10 opacity-40"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(90deg, rgba(250,125,0,0.25) 0px, rgba(250,125,0,0.25) 2px, transparent 2px, transparent 40px)",
+          }}
+        />
+      </div>
+
+      <div className="wrap relative z-10">
+        <div className="mb-16">
+          <p className="text-[12px] font-semibold uppercase tracking-[2px] text-amber-100/80 mb-4">
+            YOUR WORK, AUTONOMOUSLY HANDLED
+          </p>
+          <h2 className="font-display text-[clamp(38px,4.8vw,56px)] font-semibold tracking-[-0.04em] text-white max-w-[780px]">
+            Synth briefs you every morning
+          </h2>
+          <p className="mt-5 max-w-3xl text-[17px] text-white/70 leading-[1.8]">
+            Before your team logs in, Synth has already scanned your tools, flagged threats and opportunities, and prepared a prioritized plan — swipe through what it found.
+          </p>
+        </div>
+
+        <div className="grid gap-10 lg:grid-cols-[1fr_auto] items-start">
+          {/* Card stack */}
+          <div
+            className="relative mx-auto h-[560px] w-full max-w-[480px]"
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
+            {pages.map((page, i) => {
+              const diff = i - active
+              let style: React.CSSProperties = { zIndex: 30 - Math.abs(diff) }
+
+              if (diff === 0) {
+                style = { ...style, transform: "translate(0px, 0px) scale(1)", opacity: 1, zIndex: 30 }
+              } else if (diff === 1) {
+                style = { ...style, transform: "translate(28px, -28px) scale(0.95)", opacity: 0.9, zIndex: 20 }
+              } else if (diff === 2) {
+                style = { ...style, transform: "translate(52px, -52px) scale(0.9)", opacity: 0.6, zIndex: 10 }
+              } else if (diff < 0) {
+                style = { ...style, transform: "translate(-140%, 0px) scale(0.95)", opacity: 0, zIndex: 0 }
+              } else {
+                style = { ...style, transform: "translate(80px, -80px) scale(0.85)", opacity: 0, zIndex: 0 }
+              }
+
+              return (
+                <div
+                  key={page.key}
+                  className="absolute inset-0 transition-all duration-500 ease-out"
+                  style={style}
+                >
+                  {page.key === "glance" && (
+                    <CardShell eyebrow={page.eyebrow} title={page.title} ctaLabel="Open full briefing">
+                      <p className="text-[14px] leading-[1.7] text-slate-500">
+                        Monitored competitors, drafted campaigns, correlated feedback, flagged a cash-flow gap. One item needs your decision now.
+                      </p>
+                      {dailyItems.map((item) => (
+                        <div key={item.time} className="border-t border-slate-100 pt-3 first:border-t-0 first:pt-0">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">{item.time}</p>
+                          <p className="mt-1 text-[15px] font-semibold text-slate-900">{item.title}</p>
+                          <p className="mt-1 flex items-center gap-2 text-[13px] text-slate-500">
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#F25C05]" />
+                            {item.detail}
+                          </p>
+                        </div>
+                      ))}
+                    </CardShell>
+                  )}
+
+                  {page.key === "alerts" && (
+                    <CardShell eyebrow={page.eyebrow} title={page.title} ctaLabel="Resolve with Synth">
+                      <p className="text-[14px] leading-[1.7] text-slate-500">
+                        When a competitor moves or a deadline slips, Synth pushes it here — drafted and ready to approve.
+                      </p>
+                      {alerts.map((alert) => {
+                        const Icon = alert.icon
+                        return (
+                          <div key={alert.title} className="flex gap-3 border-t border-slate-100 pt-3 first:border-t-0 first:pt-0">
+                            <div className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-orange-50 text-[#F25C05]">
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-[15px] font-semibold text-slate-900">{alert.title}</p>
+                              <p className="mt-1 text-[13px] text-slate-500">{alert.desc}</p>
+                              <span className="mt-1 inline-block text-[11px] font-semibold uppercase tracking-wide text-slate-400">{alert.tag}</span>
+                              <div className="mt-2 flex flex-wrap gap-2">
+                                <button className="rounded-full bg-[#0A111E] px-3 py-1.5 text-[12px] font-semibold text-white transition-transform hover:scale-[1.03]">
+                                  {alert.primary}
+                                </button>
+                                <button className="rounded-full border border-slate-200 px-3 py-1.5 text-[12px] font-semibold text-slate-600 transition-colors hover:border-slate-400">
+                                  {alert.secondary}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </CardShell>
+                  )}
+
+                  {page.key === "ask" && (
+                    <CardShell eyebrow={page.eyebrow} title={page.title} ctaLabel="Chat with Synth">
+                      <p className="text-[14px] leading-[1.7] text-slate-500">
+                        Beyond the daily plan, Synth handles anything you throw at it — research, drafting, analysis.
+                      </p>
+                      <div className="space-y-3">
+                        {chatLog.map((msg, idx) => (
+                          <div
+                            key={idx}
+                            className={`rounded-2xl px-4 py-3 text-[13px] leading-[1.6] ${
+                              msg.from === "synth"
+                                ? "bg-slate-50 text-slate-600"
+                                : "ml-auto max-w-[85%] bg-[#0A111E] text-white"
+                            }`}
+                          >
+                            {msg.text}
+                          </div>
+                        ))}
+                      </div>
+                    </CardShell>
+                  )}
+                </div>
+              )
+            })}
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
-            <div className="rounded-[32px] border border-synth-border bg-white shadow-[0_40px_120px_rgba(15,23,42,0.08)] p-8">
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <p className="text-sm text-synth-text-3 uppercase tracking-[1.8px] mb-2">Your business at a glance</p>
-                    <h3 className="text-[24px] font-semibold text-synth-text-1">Good morning, Sarah <span aria-hidden="true">👋</span></h3>
-                  </div>
-                  <span className="rounded-full border border-synth-border px-4 py-2 text-[13px] font-semibold text-synth-text-2">Monday, 7:15 AM</span>
-                </div>
-
-                <div className="rounded-[28px] border border-synth-border bg-synth-bg p-5">
-                  <p className="font-semibold text-synth-text-1 mb-2">What Synth did overnight</p>
-                  <p className="text-[15px] text-synth-text-2 leading-[1.8]">
-                    Monitored competitor pricing, completed the Q3 campaign draft, correlated product feedback from last week's tickets, and flagged a cash-flow gap for finance. One item needs your decision immediately.
-                  </p>
-                </div>
-
-                <div className="space-y-4">
-                  {dailyItems.map((item) => (
-                    <div key={item.time} className="rounded-[24px] border border-synth-border bg-synth-bg p-5 shadow-sm">
-                      <div className="flex flex-wrap items-center justify-between gap-3">
-                        <div>
-                          <p className="text-sm font-semibold text-synth-text-2">{item.time}</p>
-                          <p className="mt-2 text-[16px] font-semibold text-synth-text-1">{item.title}</p>
-                        </div>
-                        <span className={`rounded-full px-3 py-1.5 text-[13px] font-semibold ${item.statusColor}`}>
-                          {item.status}
-                        </span>
-                      </div>
-                      <p className="mt-3 text-[14px] text-synth-text-3 leading-[1.75]">{item.detail}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="rounded-[32px] border border-synth-border bg-white shadow-[0_24px_80px_rgba(15,23,42,0.06)] p-8">
-                <p className="text-[12px] uppercase tracking-[2px] text-synth-accent mb-4">Business‑critical alerts</p>
-                <h3 className="text-[32px] font-display font-semibold text-synth-text-1 mb-4">Synth taps you when it matters</h3>
-                <p className="text-[16px] text-synth-text-2 leading-[1.8] mb-8">
-                  When a competitor moves, a brand risk surfaces, or a deadline is about to slip — Synth pushes the alert, drafts the response, and offers to resolve it.
-                </p>
-                <div className="space-y-4">
-                  {alerts.map((alert) => {
-                    const Icon = alert.icon
-                    return (
-                      <div key={alert.title} className="rounded-[24px] border border-synth-border bg-synth-bg p-5 shadow-sm">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-synth-accent-light text-synth-accent">
-                            <Icon className="h-5 w-5" />
-                          </div>
-                          <div>
-                            <p className="text-base font-semibold text-synth-text-1">{alert.title}</p>
-                            <p className="text-sm text-synth-text-3">{alert.desc}</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-3">
-                          <button className={`rounded-full px-4 py-2 text-sm font-semibold ${alert.accent}`}>
-                            {alert.primary}
-                          </button>
-                          <button className="rounded-full border border-synth-border px-4 py-2 text-sm font-semibold text-synth-text-1 hover:border-synth-accent/50 transition-all">
-                            {alert.secondary}
-                          </button>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <div className="rounded-[32px] border border-synth-border bg-white shadow-[0_24px_80px_rgba(15,23,42,0.06)] p-8">
-                <p className="text-[12px] uppercase tracking-[2px] text-synth-accent mb-4">On‑demand too</p>
-                <h3 className="text-[32px] font-display font-semibold text-synth-text-1 mb-4">Ask it anything, anytime</h3>
-                <p className="text-[16px] text-synth-text-2 leading-[1.8] mb-8">
-                  Beyond your daily plan, Synth handles any business task you throw at it — from research to drafting to data analysis.
-                </p>
-                <div className="space-y-5">
-                  <div className="rounded-[32px] border border-synth-border bg-synth-bg p-5">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="grid h-10 w-10 place-items-center rounded-full bg-emerald-500 text-white">
-                        <MessageCircle className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="font-semibold text-synth-text-1">Synth</p>
-                        <p className="text-sm text-emerald-600">Online</p>
-                      </div>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="rounded-[26px] bg-white p-4 text-[14px] text-synth-text-2 shadow-sm">
-                        <p>Here's the competitive intelligence you asked for:</p>
-                        <ul className="mt-3 space-y-2 pl-4 text-synth-text-3">
-                          <li>• Acme Corp just launched a new pricing model — 20% cheaper than yours at the low end</li>
-                          <li>• Their latest blog post targets your top 3 keywords; I've drafted a response article to outrank them</li>
-                          <li>• User sentiment on your last release is 89% positive; 3 key feature requests already added to the product backlog</li>
-                        </ul>
-                        <p className="mt-3 text-[12px] text-synth-text-3">Synth · 9:05 AM</p>
-                      </div>
-                      <div className="rounded-[26px] bg-synth-accent text-white p-4 text-[14px] shadow-sm">
-                        <p>What's on my plate today and is there anything I need to handle before the all‑hands?</p>
-                        <p className="mt-2 text-[12px] text-synth-accent-light">9:05 AM · ✓✓</p>
-                      </div>
-                      <div className="rounded-[26px] bg-synth-accent text-white p-4 text-[14px] shadow-sm self-end max-w-[75%]">
-                        <p>Perfect. Also pull the latest NPS scores and add them to the board deck.</p>
-                        <p className="mt-2 text-[12px] text-synth-accent-light">9:06 AM · ✓✓</p>
-                      </div>
-                      <div className="rounded-[26px] bg-white p-4 text-[14px] text-synth-text-2 shadow-sm">
-                        <p>Done — NPS data is already in the deck, and I've highlighted the 4 key drivers. Your 10 AM competitor update is ready whenever you want it.</p>
-                        <p className="mt-3 text-[12px] text-synth-text-3">Synth · 9:06 AM</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-8 flex items-center justify-between gap-4">
-                  <Link href="/#waitlist" className="inline-flex items-center gap-2 rounded-full bg-synth-accent px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">
-                    Explore Synth live
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <span className="rounded-full border border-synth-border px-4 py-2 text-sm text-synth-text-3">Live chat preview</span>
-                </div>
-              </div>
-            </div>
+          {/* Right-hand page rail, mirrors the MON/SUN/SAT list in the reference */}
+          <div className="flex flex-row items-center justify-center gap-4 lg:flex-col lg:items-end lg:gap-5 lg:pt-10">
+            {pages.map((page, i) => (
+              <button
+                key={page.key}
+                onClick={() => setActive(i)}
+                className="flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[2px] transition-colors"
+                style={{ color: i === active ? "#FFFFFF" : "rgba(255,255,255,0.4)" }}
+              >
+                <span
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{ background: i === active ? "#FA7D00" : "rgba(255,255,255,0.4)" }}
+                />
+                {page.title.replace(".", "")}
+              </button>
+            ))}
           </div>
+        </div>
+
+        {/* Nav controls + waitlist CTA */}
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={prev}
+              disabled={active === 0}
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10 disabled:opacity-30"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              onClick={next}
+              disabled={active === pages.length - 1}
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10 disabled:opacity-30"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+
+          <Link href="/#waitlist" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#0A111E] transition-transform hover:scale-105">
+            Explore Synth live
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>
