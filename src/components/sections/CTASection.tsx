@@ -14,8 +14,82 @@ export function CTASection() {
     }, 4500)
   }
 
+  // Updated to match Manus AI capabilities & agent solutions
+  const manusCapabilities = [
+    { id: 1, label: "Web Research" },
+    { id: 2, label: "Cash flow" },
+    { id: 3, label: "Documents" },
+    { id: 4, label: "Sales data" },
+    { id: 5, label: "Risk signal" },
+    { id: 6, label: "Market Intelligence" },
+    { id: 7, label: "Claim reviews" },
+    { id: 8, label: "Analytics" },
+  ]
+
   return (
     <section className="py-24 border-t border-synth-border relative overflow-hidden" id="waitlist">
+      {/* Keyframe Animations for Converging Tickers */}
+      <style>{`
+        @keyframes marquee-left {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-right {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0%); }
+        }
+        .animate-marquee-left {
+          display: flex;
+          width: max-content;
+          animation: marquee-left 30s linear infinite;
+        }
+        .animate-marquee-right {
+          display: flex;
+          width: max-content;
+          animation: marquee-right 30s linear infinite;
+        }
+      `}</style>
+
+      {/* Hero Banner Ticker Container with Parallel Grid Lines */}
+      <div className="w-full mb-16 relative border-y border-synth-border py-4 bg-synth-bg/40 overflow-hidden">
+        <div className="max-w-7xl mx-auto flex items-center justify-between relative px-4">
+          
+          {/* Left Track (Boxes Moving Inward Toward Center Logo) */}
+          <div className="flex-1 overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_10%,black_85%,transparent)]">
+            <div className="animate-marquee-right flex gap-3 items-center">
+              {[...manusCapabilities, ...manusCapabilities, ...manusCapabilities].map((item, idx) => (
+                <div
+                  key={`left-${idx}`}
+                  className="px-5 py-2.5 bg-synth-surface border border-synth-border rounded-md text-[13px] text-synth-text-2 font-medium shadow-sm whitespace-nowrap min-w-[130px] text-center"
+                >
+                  {item.label}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Centered Logo Box */}
+          <div className="mx-6 flex-shrink-0 z-10 bg-synth-surface border border-synth-border rounded-lg p-3 shadow-md flex items-center justify-center">
+            <img src="logo.png" alt="Logo" className="w-6 h-6 object-contain" />
+          </div>
+
+          {/* Right Track (Boxes Moving Inward Toward Center Logo) */}
+          <div className="flex-1 overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_15%,black_90%,transparent)]">
+            <div className="animate-marquee-left flex gap-3 items-center">
+              {[...manusCapabilities, ...manusCapabilities, ...manusCapabilities].map((item, idx) => (
+                <div
+                  key={`right-${idx}`}
+                  className="px-5 py-2.5 bg-synth-surface border border-synth-border rounded-md text-[13px] text-synth-text-2 font-medium shadow-sm whitespace-nowrap min-w-[130px] text-center"
+                >
+                  {item.label}
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       {/* Glow */}
       <div
         className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-synth-accent-light rounded-full pointer-events-none"
@@ -31,7 +105,6 @@ export function CTASection() {
             We're building something we'd want to use ourselves. you'll be first to get access when we launch, Join the waitlist!!
           </p>
 
-          {/* ----- Updated form layout: two equal columns side‑by‑side ----- */}
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-2 max-w-[380px] mx-auto mb-3.5">
             <input
               type="email"

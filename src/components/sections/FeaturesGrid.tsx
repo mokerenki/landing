@@ -153,9 +153,9 @@ export function FeaturesGrid() {
       </div>
 
       <div className="wrap relative z-10 mt-16 text-center">
-        <button className="rounded-full bg-white px-8 py-3 font-medium text-[#3B3350] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-black/20">
-          Get Started Free
-        </button>
+        <a href="/#waitlist" className="inline-flex rounded-full bg-white px-8 py-3 font-medium text-[#3B3350] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-black/20">
+          Join the list
+        </a>
       </div>
     </section>
   )

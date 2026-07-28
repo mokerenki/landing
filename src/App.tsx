@@ -18,7 +18,6 @@ import NotFound from "@/pages/NotFound"
 import VsOpenclaw from "@/pages/compare/vsOpenclaw"
 import VsChatgpt from "@/pages/compare/vsChatgpt"
 import VsTrixta from "@/pages/compare/vsTrixta"
-import VsNyla from "@/pages/compare/vsNyla"
 import Features from "@/pages/feature"
 
 
@@ -40,7 +39,6 @@ function Router() {
       <Route path="/compare/vsChatgpt" component={VsChatgpt} />
       <Route path="/compare/vsOpenclaw" component={VsOpenclaw} />
       <Route path="/compare/vsTrixta" component={VsTrixta} />
-      <Route path="/compare/vsNyla" component={VsNyla} />
       <Route component={NotFound} />
     </Switch>
   )

@@ -13,7 +13,6 @@ const compare = [
   { label: "vs. Openclaw", href: "/compare/vsOpenclaw" },
   { label: "vs. ChatGPT", href: "/compare/vsChatgpt" },
   { label: "vs. Trixta", href: "/compare/vsTrixta" },
-  { label: "vs. Nyla", href: "/compare/vsNyla" }
 ]
 
 const product = [

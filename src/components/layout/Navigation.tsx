@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { Link, useLocation } from "wouter"
 import { ChevronDown, Menu, X } from "lucide-react"
-import { useTheme } from "@/contexts/ThemeContext"
 
 const solutions = [
   { label: "Marketing", desc: "Campaigns, content, and creative — on autopilot", icon: "📈", href: "/solutions/marketing" },
@@ -20,7 +19,6 @@ export function Navigation() {
   const solutionsRef = useRef<HTMLDivElement>(null)
   const resourcesRef = useRef<HTMLDivElement>(null)
   const [location] = useLocation()
-  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -136,16 +134,9 @@ export function Navigation() {
               className="text-[14px] font-medium text-white px-[18px] py-2 rounded-full bg-synth-text-1 hover:bg-[#2A2835] transition-colors"
             >
               Join waitlist
+            
             </Link>
-            <button
-              type="button"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="px-4 py-2 rounded-full bg-slate-700 text-white text-[14px] font-medium hover:bg-slate-600 transition-colors"
-            >
-              {theme === "light" ? "Dark mode" : "Light mode"}
-            </button>
           </div>
-
           {/* Mobile Toggle */}
           <button className="lg:hidden p-2" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

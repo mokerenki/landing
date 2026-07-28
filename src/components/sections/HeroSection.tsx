@@ -13,7 +13,7 @@ const verticals = [
 // "premium ambient motion" rather than a game/confetti effect.
 const PARTICLE_COLORS = ["#1E3A8A", "#2563EB", "#93C5FD", "#818CF8"]
 
-const PARTICLE_COUNT = 95
+const PARTICLE_COUNT = 100
 const CURSOR_RADIUS = 140 // how far the cursor's force field reaches
 const REPEL_STRENGTH = 900 // higher = stronger push
 const SPRING_STRENGTH = 0.012 // pull back toward home position
@@ -236,17 +236,18 @@ export function HeroSection() {
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2 bg-synth-accent-light border border-synth-accent/20 text-synth-accent text-[13px] font-medium rounded-full px-4 py-1.5 mb-9">
             <div className="w-1.5 h-1.5 rounded-full bg-synth-accent animate-blink" />
-            Autonomous AI workforce
+            Private Beta
           </div>
 
           {/* Headline — exactly three lines */}
           <h1 className="font-serif text-[clamp(40px,6vw,72px)] font-normal leading-[1.14] tracking-[-1.5px] text-synth-text-1 mb-10">
             Meet Synth.
             <br />
-            You run the business — 
+            secure, always-on autonomous agents 
+
             <br />
             <em className="text-synth-accent not-italic">
-              it runs the rest.
+              for your business
             </em>
           </h1>
 
@@ -280,7 +281,7 @@ export function HeroSection() {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your work email"
+              placeholder="Enter your email"
               required
               autoComplete="email"
               className="w-full bg-synth-surface border border-synth-border-med rounded-full px-5 py-3 text-[15px] text-synth-text-1 outline-none shadow-sm transition-all focus:border-synth-accent focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] placeholder:text-synth-text-3"
