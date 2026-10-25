@@ -14,7 +14,7 @@ const dailyItems = [
 const alerts = [
   {
     icon: AlertTriangle,
-    title: "Negative comments spike — @synthai on X",
+    title: "Negative comments spike — @onsite48 on X",
     desc: "Mentions up 340% in 2 hours. Response thread drafted, engineering alerted.",
     tag: "brand risk",
     primary: "Approve response",
@@ -47,10 +47,10 @@ const alerts = [
 ]
 
 const chatLog = [
-  { from: "synth", text: "Acme just launched pricing 20% below yours at the low end. Their new blog post targets your top 3 keywords — I've drafted a response article. Sentiment on your last release is 89% positive." },
+  { from: "onsite48", text: "Acme just launched pricing 20% below yours at the low end. Their new blog post targets your top 3 keywords — I've drafted a response article. Sentiment on your last release is 89% positive." },
   { from: "user", text: "What's on my plate today, anything before the all-hands?" },
   { from: "user", text: "Also pull the latest NPS scores into the board deck." },
-  { from: "synth", text: "Done — NPS is in the deck with 4 key drivers highlighted. Your 10 AM competitor update is ready when you are." },
+  { from: "onsite48", text: "Done — NPS is in the deck with 4 key drivers highlighted. Your 10 AM competitor update is ready when you are." },
 ]
 
 const pages = [
@@ -77,7 +77,7 @@ function CardShell({
         <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-slate-400">Mon · 06:15</span>
       </div>
       <div className="mt-4 flex items-center gap-2">
-        <span className="rounded-md bg-[#0A111E] px-2 py-1 text-[11px] font-bold text-white">Synth OS</span>
+        <span className="rounded-md bg-[#0A111E] px-2 py-1 text-[11px] font-bold text-white">Onsite48 OS</span>
         <span className="text-[13px] text-slate-400">Daily Briefing</span>
       </div>
       <h3 className="mt-5 text-[26px] font-semibold tracking-[-0.02em] text-slate-900">{title}</h3>
@@ -146,10 +146,10 @@ export function LiveOverviewSection() {
             YOUR WORK, AUTONOMOUSLY HANDLED
           </p>
           <h2 className="font-display text-[clamp(38px,4.8vw,56px)] font-semibold tracking-[-0.04em] text-white max-w-[780px]">
-            Synth briefs you every morning
+            Onsite48 briefs you every morning
           </h2>
           <p className="mt-5 max-w-3xl text-[17px] text-white/70 leading-[1.8]">
-            Before your team logs in, Synth has already scanned your tools, flagged threats and opportunities, and prepared a prioritized plan — swipe through what it found.
+            Before your team logs in, Onsite48 has already scanned your tools, flagged threats and opportunities, and prepared a prioritized plan — swipe through what it found.
           </p>
         </div>
 
@@ -200,11 +200,11 @@ export function LiveOverviewSection() {
                     </CardShell>
                   )}
 
-                  {page.key === "alerts" && (
-                    <CardShell eyebrow={page.eyebrow} title={page.title} ctaLabel="Resolve with Synth">
-                      <p className="text-[14px] leading-[1.7] text-slate-500">
-                        When a competitor moves or a deadline slips, Synth pushes it here — drafted and ready to approve.
-                      </p>
+{page.key === "alerts" && (
+                      <CardShell eyebrow={page.eyebrow} title={page.title} ctaLabel="Resolve with Onsite48">
+                        <p className="text-[14px] leading-[1.7] text-slate-500">
+                          When a competitor moves or a deadline slips, Onsite48 pushes it here — drafted and ready to approve.
+                        </p>
                       {alerts.map((alert) => {
                         const Icon = alert.icon
                         return (
@@ -231,17 +231,17 @@ export function LiveOverviewSection() {
                     </CardShell>
                   )}
 
-                  {page.key === "ask" && (
-                    <CardShell eyebrow={page.eyebrow} title={page.title} ctaLabel="Chat with Synth">
-                      <p className="text-[14px] leading-[1.7] text-slate-500">
-                        Beyond the daily plan, Synth handles anything you throw at it — research, drafting, analysis.
-                      </p>
+{page.key === "ask" && (
+                      <CardShell eyebrow={page.eyebrow} title={page.title} ctaLabel="Chat with Onsite48">
+                        <p className="text-[14px] leading-[1.7] text-slate-500">
+                          Beyond the daily plan, Onsite48 handles anything you throw at it — research, drafting, analysis.
+                        </p>
                       <div className="space-y-3">
                         {chatLog.map((msg, idx) => (
                           <div
                             key={idx}
                             className={`rounded-2xl px-4 py-3 text-[13px] leading-[1.6] ${
-                              msg.from === "synth"
+                              msg.from === "onsite48"
                                 ? "bg-slate-50 text-slate-600"
                                 : "ml-auto max-w-[85%] bg-[#0A111E] text-white"
                             }`}
@@ -296,7 +296,7 @@ export function LiveOverviewSection() {
           </div>
 
           <Link href="/#waitlist" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#0A111E] transition-transform hover:scale-105">
-            Explore Synth live
+            Explore Onsite48 live
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

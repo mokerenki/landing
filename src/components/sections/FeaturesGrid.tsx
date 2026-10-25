@@ -141,7 +141,7 @@ export function FeaturesGrid() {
             Plugged into everything you already run
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-white/70">
-            200+ connectors, live. No migrations, no new logins — Synth meets your business exactly where it already works.
+            200+ connectors, live. No migrations, no new logins — Onsite48 meets your business exactly where it already works.
           </p>
         </div>
       </div>

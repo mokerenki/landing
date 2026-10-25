@@ -34,14 +34,14 @@ const workflows = [
 export default function Marketing() {
   return (
     <SolutionPageLayout
-      eyebrow="Synth for Marketing"
+      eyebrow="Onsite48 for Marketing"
       headline="The autonomous engine for"
       headlineAccent="your entire marketing lifecycle"
-      subhead="From research to campaign assets to analysis — Synth handles complex, multi-step marketing workflows from start to finish in a single prompt."
+      subhead="From research to campaign assets to analysis — Onsite48 handles complex, multi-step marketing workflows from start to finish in a single prompt."
       ctaText="Join waitlist"
       ctaHref="/#waitlist"
       workflowTitle="End-to-end marketing workflows"
-      workflowSub="One prompt sets the entire workflow in motion. Synth handles every step autonomously."
+      workflowSub="One prompt sets the entire workflow in motion. Onsite48 handles every step autonomously."
       workflows={workflows}
       heroImage="/marketing.png"
       heroImageAlt="Marketing solution image"

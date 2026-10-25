@@ -5,8 +5,6 @@ const verticals = [
   "Marketing",
   "Finance",
   "Product",
-  "Executive Workflow",
-  "Healthcare Admin",
 ]
 
 // Muted, brand-aligned particle palette — kept desaturated so it reads as
@@ -241,7 +239,7 @@ export function HeroSection() {
 
           {/* Headline — exactly three lines */}
           <h1 className="font-serif text-[clamp(40px,6vw,72px)] font-normal leading-[1.14] tracking-[-1.5px] text-synth-text-1 mb-10">
-            Meet Synth.
+            Meet Onsite48.
             <br />
             secure, always-on autonomous agents 
 

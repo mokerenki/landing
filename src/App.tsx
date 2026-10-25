@@ -1,4 +1,4 @@
-import { Route, Switch } from "wouter"
+import { Route, Switch, useLocation } from "wouter"
 import { ThemeProvider } from "@/contexts/ThemeContext"
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar"
 import { Navigation } from "@/components/layout/Navigation"
@@ -15,11 +15,16 @@ import Trust from "@/pages/Trust"
 import DataProcessing from "@/pages/Dataprocessing"
 import Terms from "@/pages/terms"
 import NotFound from "@/pages/NotFound"
-import VsOpenclaw from "@/pages/compare/vsOpenclaw"
-import VsChatgpt from "@/pages/compare/vsChatgpt"
-import VsTrixta from "@/pages/compare/vsTrixta"
 import Features from "@/pages/feature"
+import { useEffect } from "react"
 
+function ScrollToTop() {
+  const [location] = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location])
+  return null
+}
 
 function Router() {
   return (
@@ -36,9 +41,6 @@ function Router() {
       <Route path="/trust" component={Trust} />
       <Route path="/data-processing" component={DataProcessing} />
       <Route path="/terms" component={Terms} />
-      <Route path="/compare/vsChatgpt" component={VsChatgpt} />
-      <Route path="/compare/vsOpenclaw" component={VsOpenclaw} />
-      <Route path="/compare/vsTrixta" component={VsTrixta} />
       <Route component={NotFound} />
     </Switch>
   )
@@ -51,6 +53,7 @@ export default function App() {
         <AnnouncementBar />
         <Navigation />
         <main className="flex-1">
+          <ScrollToTop />
           <Router />
         </main>
         <Footer />

@@ -18,8 +18,8 @@ import {
 const plans = [
   {
     tier: 'Starter',
-    monthly: 15,
-    annual: 12.5, // $150 / 12 approx
+    monthly: 400,
+    annual: 333, // R400 / month approx
     desc: 'Standard monthly usage',
     cta: 'Reserve spot',
     featured: false,
@@ -38,8 +38,8 @@ const plans = [
   },
   {
     tier: 'Pro',
-    monthly: 35,
-    annual: 29.1666, // $350 / 12 approx
+    monthly: 800,
+    annual: 666, // R800 / month approx
     desc: 'Customizable monthly usage',
     cta: 'Reserve spot',
     featured: true,
@@ -58,12 +58,12 @@ const plans = [
   },
   {
     tier: 'Max',
-    monthly: 170,
-    annual: 141.6666, // $1700 / 12 approx
+    monthly: 400,
+    annual: 333, // R400 / month approx
     desc: 'Extended usage for productivity',
     cta: 'Reserve spot',
     featured: false,
-    credits: '40,000 credits / month',
+    credits: '4,000 credits / month',
     specialFeature: { icon: Monitor, text: 'Free Cloud Computer', color: 'text-blue-500' },
     features: [
       { icon: RotateCcw, text: '300 refresh credits everyday' },
@@ -122,7 +122,7 @@ export function PricingSection() {
             >
               <div className="mb-8">
                 <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-4xl font-medium text-gray-900">$</span>
+                  <span className="text-4xl font-medium text-gray-900">R</span>
                   <span className="text-6xl font-medium text-gray-900 tracking-tight">
                     {isAnnual ? Math.floor(plan.annual) : plan.monthly}
                   </span>
@@ -170,7 +170,7 @@ export function PricingSection() {
                 <Layout className="w-7 h-7 text-gray-900" />
               </div>
               <div>
-                <h4 className="text-xl font-medium text-gray-900">Synth Plans for Teams & Businesses</h4>
+                <h4 className="text-xl font-medium text-gray-900">Onsite48 Plans for Teams & Businesses</h4>
                 <p className="text-gray-500">Flexible plans for teams of all sizes.</p>
               </div>
             </div>

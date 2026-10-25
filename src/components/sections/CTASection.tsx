@@ -127,13 +127,13 @@ export function CTASection() {
 
           <p className="text-[12px] text-synth-text-3">No spam. No commitment. Just early access.</p>
           <div className="flex justify-center gap-5 mt-5">
-            <a href="mailto:hello@synth.ai?subject=API access" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
+            <a href="mailto:hello@onsite48.com?subject=API access" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
               ⟨/⟩ API access
             </a>
-            <a href="mailto:healthcare@synthai.world" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
+            <a href="mailto:healthcare@onsite48.com" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
               🏥 Healthcare demo
             </a>
-            <a href="mailto:hello@synthai.world?subject=Enterprise" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
+            <a href="mailto:hello@onsite48.com?subject=Enterprise" className="text-[13px] text-synth-text-3 flex items-center gap-1 hover:text-synth-accent transition-colors">
               🏢 Enterprise
             </a>
           </div>

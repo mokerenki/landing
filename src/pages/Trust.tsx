@@ -102,7 +102,7 @@ export default function Trust() {
               Our security team is happy to share our SOC 2 report, discuss custom compliance requirements, or walk you through our architecture.
             </p>
             <a
-              href="mailto:security@synth.ai?subject=Security Inquiry"
+              href="mailto:security@onsite48.com?subject=Security Inquiry"
               className="inline-block bg-synth-text-1 text-white rounded-full px-7 py-3 text-[15px] font-medium hover:bg-[#2A2835] transition-colors"
             >
               Contact security team

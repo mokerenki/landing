@@ -45,7 +45,7 @@ export function SolutionPageLayout({
             href="/"
             className="absolute right-4 top-4 z-20 rounded-full border border-synth-border bg-white p-2 shadow-sm transition hover:scale-[1.02]"
           >
-            <img src="/logo.png" alt="Synth home" className="h-12 w-12 object-contain" />
+            <img src="/logo.png" alt="Onsite48 home" className="h-12 w-12 object-contain" />
           </Link>
 
           {heroImage && (
@@ -80,7 +80,7 @@ export function SolutionPageLayout({
       {/* Workflow Cards */}
       <section className="py-20">
         <div className="wrap">
-          <p className="eyebrow">Only Synth Can Do</p>
+          <p className="eyebrow">Only Onsite48 Can Do</p>
           <h2 className="section-title">{workflowTitle}</h2>
           <p className="section-sub">{workflowSub}</p>
 

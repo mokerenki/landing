@@ -20,24 +20,24 @@ const workflows = [
     tagColor: "#FFF0E6",
     tagText: "#B84D00",
     title: "Prepare for every meeting in minutes",
-    desc: "Before any call, Synth builds a deal brief — company overview, stakeholder map, likely objections, and recommended talking points — automatically.",
+    desc: "Before any call, Onsite48 builds a deal brief — company overview, stakeholder map, likely objections, and recommended talking points — automatically.",
   },
   {
     tag: "CRM Ops",
     tagColor: "#EFF6FF",
     tagText: "#2563EB",
     title: "Keep your CRM clean without lifting a finger",
-    desc: "Synth logs call notes, updates deal stages, flags stale opportunities, and sends follow-up sequences — synced to Salesforce, HubSpot, or your CRM of choice.",
+    desc: "Onsite48 logs call notes, updates deal stages, flags stale opportunities, and sends follow-up sequences — synced to Salesforce, HubSpot, or your CRM of choice.",
   },
 ]
 
 export default function Sales() {
   return (
     <SolutionPageLayout
-      eyebrow="Synth for Sales"
+      eyebrow="Onsite48 for Sales"
       headline="From cold outreach"
       headlineAccent="to closed deals"
-      subhead="Synth researches prospects, enriches leads, drafts personalised outreach, and prepares deal intelligence — autonomously, at the scale your pipeline needs."
+      subhead="Onsite48 researches prospects, enriches leads, drafts personalised outreach, and prepares deal intelligence — autonomously, at the scale your pipeline needs."
       ctaText="Join waitlist"
       ctaHref="/#waitlist"
       workflowTitle="End-to-end sales workflows"

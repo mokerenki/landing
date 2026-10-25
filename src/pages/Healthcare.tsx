@@ -34,7 +34,7 @@ const capabilities = [
   {
     icon: "🔗",
     title: "EHR Integrations",
-    desc: "Connects to your existing patient management and EHR systems. Synth reads and writes data — no double-entry, no manual exports.",
+    desc: "Connects to your existing patient management and EHR systems. Onsite48 reads and writes data — no double-entry, no manual exports.",
     detail: "Integrates with GoodX, Elixir, DragonWave, and custom hospital management systems via API",
   },
   {
@@ -60,7 +60,7 @@ export default function Healthcare() {
             href="/"
             className="absolute right-4 top-4 z-20 rounded-full border border-synth-border bg-white p-2 shadow-sm transition hover:scale-[1.02]"
           >
-            <img src="/logo.png" alt="Synth home" className="h-12 w-12 object-contain" />
+            <img src="/logo.png" alt="Onsite48 home" className="h-12 w-12 object-contain" />
           </Link>
 
           <div className="overflow-hidden rounded-[32px] border border-synth-border bg-synth-surface shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
@@ -78,7 +78,7 @@ export default function Healthcare() {
               <em className="text-synth-accent">recovered revenue</em>
             </h1>
             <p className="text-[17px] text-synth-text-2 leading-[1.7] max-w-[600px] mx-auto mb-8">
-              Synth automates the most painful, high-stakes admin work in healthcare — so your team spends time on patients, not paperwork.
+              Onsite48 automates the most painful, high-stakes admin work in healthcare — so your team spends time on patients, not paperwork.
             </p>
             <Link
               href="/pricing"
@@ -120,7 +120,7 @@ export default function Healthcare() {
           {/* Compliance bar */}
           <div className="bg-synth-surface border border-synth-border rounded-[16px] p-5 max-w-[960px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-[13px] text-synth-text-2 leading-[1.6] max-w-[560px]">
-              <strong className="text-synth-text-1">Built for South African compliance.</strong> Synth&apos;s healthcare module is designed with POPIA (Protection of Personal Information Act) compliance at its core — data residency in South Africa, audit trails, role-based access controls, and patient consent management built in.
+              <strong className="text-synth-text-1">Built for South African compliance.</strong> Onsite48&apos;s healthcare module is designed with POPIA (Protection of Personal Information Act) compliance at its core — data residency in South Africa, audit trails, role-based access controls, and patient consent management built in.
             </p>
             <div className="flex flex-wrap gap-2">
               {["POPIA Compliant", "NHRPL Codes", "Medical Scheme API", "Audit Trail", "Data Residency SA"].map((tag) => (
@@ -144,12 +144,12 @@ export default function Healthcare() {
               We offer a free 30-minute demonstration tailored to your specific workflows. No commitment, no setup required.
             </p>
             <a
-              href="mailto:healthcare@synth.ai?subject=Healthcare Demo Request"
+              href="mailto:healthcare@onsite48.com?subject=Healthcare Demo Request"
               className="inline-block bg-synth-accent text-white rounded-full px-7 py-3 text-[15px] font-medium hover:bg-[#1D4ED8] transition-colors mb-3"
             >
               Book a demo →
             </a>
-            <p className="text-[12px] text-synth-text-3">Or email us at healthcare@synth.ai · We respond within 24 hours</p>
+            <p className="text-[12px] text-synth-text-3">Or email us at healthcare@onsite48.com · We respond within 24 hours</p>
           </div>
         </div>
       </section>

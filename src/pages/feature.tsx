@@ -18,9 +18,9 @@ const features: Feature[] = [
     number: "01",
     icon: "💓",
     tag: "Proactive Heartbeat",
-    headline: "Synth doesn't wait to be asked",
+    headline: "Onsite48 doesn't wait to be asked",
     description:
-      "Unlike chatbots, Synth continuously monitors your calendar, emails, deadlines, and connected tools. It identifies important events before they become problems and proactively surfaces what matters — unprompted, every day.",
+      "Unlike chatbots, Onsite48 continuously monitors your calendar, emails, deadlines, and connected tools. It identifies important events before they become problems and proactively surfaces what matters — unprompted, every day.",
     accent: "#2563EB",
     visual: "heartbeat",
   },
@@ -31,7 +31,7 @@ const features: Feature[] = [
     tag: "Autonomous Multi-Agent",
     headline: "One task. Dozens of agents. Zero hand-holding.",
     description:
-      "Synth breaks complex tasks into independent sub-tasks and deploys a dedicated agent for each — running simultaneously, in parallel, each with its own fresh context. Quality stays consistent, no matter the scale.",
+      "Onsite48 breaks complex tasks into independent sub-tasks and deploys a dedicated agent for each — running simultaneously, in parallel, each with its own fresh context. Quality stays consistent, no matter the scale.",
     accent: "#7C3AED",
     visual: "agent",
   },
@@ -42,7 +42,7 @@ const features: Feature[] = [
     tag: "Seamless Tool Integration",
     headline: "Connects to the tools your business runs on",
     description:
-      "Synth reads from and writes to your existing tools — Google Workspace, Slack, Xero, HubSpot, and more. No manual exports, no copy-paste. One continuous flow across your entire stack.",
+      "Onsite48 reads from and writes to your existing tools — Google Workspace, Slack, Xero, HubSpot, and more. No manual exports, no copy-paste. One continuous flow across your entire stack.",
     accent: "#059669",
     visual: "tools",
   },
@@ -53,7 +53,7 @@ const features: Feature[] = [
     tag: "Custom MCP & API",
     headline: "Connect your own systems. Build on top.",
     description:
-      "Pre-built connectors are just the start. Register custom MCP servers for your internal tools, or trigger Synth programmatically via REST API. Webhooks deliver results back to your own infrastructure.",
+      "Pre-built connectors are just the start. Register custom MCP servers for your internal tools, or trigger Onsite48 programmatically via REST API. Webhooks deliver results back to your own infrastructure.",
     accent: "#D97706",
     visual: "code",
   },
@@ -64,7 +64,7 @@ const features: Feature[] = [
     tag: "Browser Operator",
     headline: "Navigates the web with your session",
     description:
-      "Synth operates inside your actual browser session — authenticated, from your IP. It navigates, clicks, fills forms, and completes multi-step tasks across platforms that would block a standard bot.",
+      "Onsite48 operates inside your actual browser session — authenticated, from your IP. It navigates, clicks, fills forms, and completes multi-step tasks across platforms that would block a standard bot.",
     accent: "#0891B2",
     visual: "browser",
   },
@@ -88,12 +88,12 @@ function VisualHeartbeat() {
     <div className="viz-heartbeat">
       <div className="time">● 6:45 AM · Morning briefing</div>
       <div className="msg">
-        <div className="sender">
-          <div className="avatar">S</div>
-          <div>
-            <span className="name">Synth</span> <span className="sub">· just now</span>
-          </div>
-        </div>
+<div className="sender">
+           <div className="avatar">O</div>
+           <div>
+             <span className="name">Onsite48</span> <span className="sub">· just now</span>
+           </div>
+         </div>
         <strong>Good morning.</strong> Here's today:<br />
         — <strong>9 AM</strong> · Ndali Group call · notes prepped<br />
         — <strong>11:30 AM</strong> · Lwazi's contract reply <span className="highlight">overdue (2d)</span><br />
@@ -194,7 +194,7 @@ function VisualTools() {
           <span className="icon">🔗</span>API
         </div>
         <div className="viz-tool-center">
-           Synth <span>MCP</span>
+           Onsite48 <span>MCP</span>
         </div>
       </div>
     </div>
@@ -209,7 +209,7 @@ function VisualCode() {
         <span className="code-dot"></span>
         <span className="code-dot"></span>
         <span style={{ marginLeft: 8, fontSize: 11, color: "#8B949E", fontWeight: 500 }}>
-          POST /api/synth/v1/tasks
+          POST /api/onsite48/v1/tasks
         </span>
       </div>
       <div className="code-body">
@@ -1313,7 +1313,7 @@ export default function Features() {
               <em>One agent that uses all of them.</em>
             </h1>
             <p>
-              Most AI tools give you a chat window. Synth is built from six interconnected
+              Most AI tools give you a chat window. Onsite48 is built from six interconnected
               capabilities that work together — from your first message to a completed result,
               without you managing any step in between.
             </p>

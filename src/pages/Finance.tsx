@@ -34,7 +34,7 @@ const workflows = [
 export default function Finance() {
   return (
     <SolutionPageLayout
-      eyebrow="Synth for Finance"
+      eyebrow="Onsite48 for Finance"
       headline="From raw data to"
       headlineAccent="financial intelligence"
       subhead="Build financial models, analyse live market data, research hundreds of firms in parallel, and produce investment-ready deliverables — in one prompt."

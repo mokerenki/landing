@@ -10,7 +10,7 @@ export default function DataProcessing() {
       <nav className="border-b border-gray-100 sticky top-0 bg-white/80 backdrop-blur-md z-50">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="text-xl font-serif font-medium tracking-tight hover:opacity-70 transition-opacity">
-            synth<span className="text-indigo-600">.ai</span>
+            onsite48<span className="text-indigo-600">.ai</span>
           </Link>
           <Link href="/terms" className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
             Terms of Use
@@ -34,7 +34,7 @@ export default function DataProcessing() {
           <section className="mb-16">
             <h2 className="text-3xl font-serif font-medium text-gray-900 mb-8">1. Introduction</h2>
             <p className="text-gray-600 leading-relaxed">
-              Synth AI (“Synth,” “we,” “us,” or “our”) provides an autonomous AI agent platform that helps regulated enterprises automate operational workflows. We are committed to protecting the privacy and security of the data our customers (“you” or “your”) entrust to us.
+              Onsite48 (“Onsite48,” “we,” “us,” or “our”) provides an autonomous AI agent platform that helps regulated enterprises automate operational workflows. We are committed to protecting the privacy and security of the data our customers (“you” or “your”) entrust to us.
             </p>
             <p className="text-gray-600 leading-relaxed">
               This Data Processing Policy explains what data we process, why, where it is stored, and — critically — how our architectural choices ensure that your proprietary business knowledge remains yours alone.
@@ -52,7 +52,7 @@ export default function DataProcessing() {
             </div>
             <div className="p-8 bg-indigo-50 rounded-[32px] border border-indigo-100">
               <h3 className="text-lg font-bold text-indigo-900 mb-4 flex items-center gap-2">
-                <Shield className="w-5 h-5 text-indigo-600" /> Synth is the Data Processor
+                <Shield className="w-5 h-5 text-indigo-600" /> Onsite48 is the Data Processor
               </h3>
               <p className="text-indigo-900/70 text-sm leading-relaxed">
                 We process data only on your documented instructions, as set out in our service agreement and this policy.
@@ -134,9 +134,9 @@ export default function DataProcessing() {
               If you have questions about this Data Processing Policy or wish to exercise your rights, please contact our Information Officer.
             </p>
             <div className="space-y-2">
-              <p className="font-bold text-indigo-900">Synth AI (Pty) Ltd</p>
-              <a href="mailto:privacy@synth.ai" className="text-indigo-600 font-bold hover:underline">
-                Hello@synthai.world
+              <p className="font-bold text-indigo-900">Onsite48 (Pty) Ltd</p>
+              <a href="mailto:privacy@onsite48.com" className="text-indigo-600 font-bold hover:underline">
+                Hello@onsite48.com
               </a>
               <p className="text-sm text-indigo-900/50 mt-4">Cape Town, South Africa</p>
             </div>
@@ -146,10 +146,10 @@ export default function DataProcessing() {
 
       <footer className="border-t border-gray-100 py-12">
         <div className="max-w-4xl mx-auto px-6 flex justify-between items-center text-sm text-gray-400">
-          <p>© 2026 Synth AI (Pty) Ltd.</p>
+          <p>© 2026 Onsite48 (Pty) Ltd.</p>
           <div className="flex gap-6">
             <Link href="/terms" className="hover:text-gray-900 transition-colors">Terms</Link>
-            <a href="mailto:privacy@synth.ai" className="hover:text-gray-900 transition-colors">Privacy</a>
+            <a href="mailto:privacy@onsite48.com" className="hover:text-gray-900 transition-colors">Privacy</a>
           </div>
         </div>
       </footer>

@@ -5,21 +5,11 @@ const solutions = [
   { label: "Sales", href: "/solutions/sales" },
   { label: "Finance", href: "/solutions/finance" },
   { label: "Product", href: "/solutions/product" },
-  { label: "Executive Workflow", href: "/solutions/personal" },
-  { label: "Healthcare Admin", href: "/solutions/healthcare" },
-]
-
-const compare = [
-  { label: "vs. Openclaw", href: "/compare/vsOpenclaw" },
-  { label: "vs. ChatGPT", href: "/compare/vsChatgpt" },
-  { label: "vs. Trixta", href: "/compare/vsTrixta" },
 ]
 
 const product = [
   { label: "Features", href: "/pages/feature" },
   { label: "Pricing", href: "/pricing" },
-  { label: "API", href: "/api-docs" },
-  { label: "Custom MCPs", href: "/mcp" }
 ]
 
 const legal = [
@@ -32,11 +22,11 @@ export function Footer() {
   return (
     <footer className="border-t border-synth-border bg-synth-surface">
       <div className="wrap py-14 mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-2 md:grid-cols-[1.8fr_repeat(4,1fr)] gap-8 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-[1.8fr_repeat(3,1fr)] gap-8 mb-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="font-serif text-[22px] text-synth-text-1 tracking-[-0.3px] font-medium">
-              Synth<span className="text-indigo-600">.AI</span>
+              Onsite48<span className="text-indigo-600">.AI</span>
             </Link>
             <p className="text-[13px] text-synth-text-3 leading-[1.65] mt-2 max-w-[200px]">
               Bridging the GAP between thinking and doing(execution).
@@ -71,20 +61,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Compare*/}
-          <div>
-            <h4 className="text-[12px] font-semibold text-synth-text-1 uppercase tracking-[1px] mb-3">Compare</h4>
-            <ul className="space-y-2">
-              {compare.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className="text-[13px] text-synth-text-3 hover:text-synth-text-1 transition-colors">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Legal */}
           <div>
             <h4 className="text-[12px] font-semibold text-synth-text-1 uppercase tracking-[1px] mb-3">Legal</h4>
@@ -101,12 +77,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-synth-border pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
-          <p className="text-[12px] text-synth-text-3">© 2026 Synth AI · hello@synthai.world</p>
-          <div className="flex gap-3">
-            {["LinkedIn", "X / Twitter", "Instagram"].map((item) => (
-              <a key={item} href="#" className="text-[12px] text-synth-text-3 hover:text-synth-text-1 transition-colors">{item}</a>
-            ))}
-          </div>
+          <p className="text-[12px] text-synth-text-3">© 2026 Onsite48 · hello@synthai.world</p>
         </div>
       </div>
     </footer>
